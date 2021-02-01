@@ -1,4 +1,69 @@
+# Oracle SQL
 
+**Data**: Information about some facts.  
+**Database**: Collection of Information that makes sense when used together and can analyze it for a better understanding of it.  
+**Database management system(DBMS)**: is a software that is used to organize data in the database.
+
+- DBMS is used to communicate to the actual database.  
+- DBMS can be considered a Concept, An Abstraction, and a hierarchical model.
+
+There are three types of DBMS.
+
+## HDBMS  
+
+HDBMS is the first type of DBMS, Developed in the mid-1950s this was the earliest software implementation of DBMS.
+- It works by storing each data record as a node, each node is connected hierarchically to one another, hence the name Hierarchical DBMS.  
+- Here the root node is the entry point of the database.  
+- The entire database can be visualized as a binary tree.  
+- We insert data from left to right of leftmost node to rightmost node.  
+- All the nodes are balanced first before inserting data into any other node, i.e each node should have two child nodes.  
+
+**Drawbacks**  
+- The drawback of HDBMS is that it takes a lot of time to reach the last node of database.  
+- Another major drawback is that if the link between nodes is lost due to technical difficulties, it can't be accessed. 
+![HDBMS](./img/HDBMS.png)  
+
+## NDBMS  
+
+Network DBMS is an upgrade over the HDBMS.  
+It was designed to overcome the drawbacks of HDBMS.  
+
+- NDBMS has all the features of HDBMS.  
+- To overcome the defects of HDBMS, in NDBMS each data node is connected to all other nodes.  
+- So that even if we loose one link between two nodes, we can access it from other node.  
+- This linking between all nodes is similar to that of a graph/network.  
+- Ex: a network of five nodes will be interconnected with each other, So we can just reach any node in a single jump from the root node.  
+
+**Advantages**  
+- the major advantage of this approach is that every node in the network is just one jump away from the root node which makes it super-fast to access the node.  
+
+**Drawbacks**  
+- The major drawback is that, the Complexity of the network makes accessing the node becomes congested.  
+- The processing power needed to access the node grows exponential for every node added to the network.  
+- Consider a database with million records, here each node is connected with each other node, this creates a congested network.  
+![NDBMS](./img/NDBMS.jpg)  
+
+## RDBMS  
+
+Relational DBMS is the latest iteration of DBMS proposed in 1980 to mitigate the problems of NDBMS and it did.  
+
+- In RDBMS we store data in the form of tables, even a single data(record) is stored as an item in a table.  
+- **Entity:**  is the table name.  
+- **Attributes:** are the column names of table.
+- **Record:** is one row of data in the table.  
+- True power of RDBMS comes when we link two tables to create relations between them.
+- It is the most Dominate DBMS in the Software industry.  
+
+**Implementations**  
+- There are many Implementations of RDBMS that are being used in the industry.  
+- Some of them are Oracle database, MySQL(oracle owned), PostgreSQL, MongoDB.  
+- Each RDBMS with their own pros and cons.  
+- **Oracle Database** is the industry standard RDBMS that is used for enterprise level products. 
+- **MySQL** is the opensource database that is mostly used by beginners to learn and experiment.  
+- **PostgreSQL** is one of the upcoming database that is used by startups for faster deployment and flexibility.  
+- In this tutorial we are learning Oracle SQL 10g.  
+- Currently the latest Oracle database version is 20c, but many Big companies are still developing products using Oracle 10g, Oracle 11g-xe, Oracle 12g versions.  
+- It is a good practice to learn every thing of one oracle version then learn as needed depending on the project and company.  
 
 ## Installation  
 
@@ -151,11 +216,15 @@ While Database we are using is Oracle 11g-xe, we can use the latest SqlDeveloper
 - Copy the path of java jdk, in ubuntu the path is similar to `/usr/lib/jvm/jdk-11.0.9/`.  
 - Run `./sqldeveloper.sh` file.  
 - If asked for the jdk path paste the above path.  
-- But it would be annoying to run the program by going to the path every time,instead lets create a shortcut.
-- `sudo ln -s /opt/sqldeveloper/sqldeveloper.sh /usr/local/bin/sqldeveloper`
-- After this run `sqldeveloper` in terminal as it is now available globally, but will give an error as the file sqldeveloper.sh has a relative path to sqldeveloper.
-- We now change it to absolute by editing it. run these
-- `sudo nano /opt/sqldeveloper/sqldeveloper.sh` and paste this or edit the file to look like this and save it.  
+
+**Create a Shell Shortcut**  
+
+- run `sudo ln -s /opt/sqldeveloper/sqldeveloper.sh /usr/local/bin/sqldeveloper`  
+- Run `sqldeveloper`,in any terminal.  
+- We may get an error, as the file sqldeveloper.sh has a relative path to sqldeveloper.
+- To fix this we need to change the executable path to absolute.  
+- run `sudo nano /opt/sqldeveloper/sqldeveloper.sh` 
+- edit the file to look like this and save it.  
 
 ```bash
 #!/bin/bash
@@ -164,9 +233,11 @@ While Database we are using is Oracle 11g-xe, we can use the latest SqlDeveloper
 ```
 
 - now try running `sqldeveloper` in terminal, this will launch the software without any errors.
-- Now lets create a desktop shortcut to launch the software from gui.
-- run `sudo nano /usr/share/applications/sqldeveloper.desktop`
-- paste these lines to create a shortcut and save the file
+
+**Create a DashBoard/Desktop Shortcut**  
+
+- Now lets create a desktop shortcut to launch the software from gui.  
+- run `sudo nano /usr/share/applications/sqldeveloper.desktop` and paste these lines to create a shortcut
 
 ```bash
 [Desktop Entry]
@@ -179,48 +250,13 @@ StartupNotify=true
 Categories=Development;
 ```  
 
-- Thats it now the sqldeveloper is installed properly and can be used with desktop search shortcut.
+- Thats it the sqldeveloper is installed properly and can be used with desktop shortcut.
 
+## SQL  
 
+**SQL**: Pronounced as S.Q.L or see quel(SEQUEL) both are correct.  
 
-
-
-
-
-Data: Information about some facts.
-Database: Collection of Information that makes sense when put together and can analyze it for a better understanding of it.  
-Database management system: is a concept that is used to organize data in the database, this is usually a system that is used to communicate to the actual database.
-
--   DBMS is a theoretical Concept, An Abstraction, and a hierarchical model.
--   There are three types of DBMS.
-
-1. HDBMS: is the first type of DBMS, Developed in the mid-1950s this was the earliest software implementation of DBMS.
-    - This database works by taking the data in node format, each node is connected hierarchically hence the name.
-    - Here the root node is the entry point of the database.
-    - The entire database is a binary tree, we insert data from left to right and from leftmost node to right.
-    - All the nodes are balanced first before inserting data into any other node.
-    - This has the drawback that it takes a lot of time to reach the last node
-    - Another major drawback is that if the link to the node is lost, even though the data is present in the database there is no way to access it.
-2. NDBMS: Network DBMS is an upgrade over the HDBMS so that it won't have those drawbacks.
-
-    - We have all the features of an HDBMS and a few more that mitigate the drawbacks of it.
-    - The first feature is that all the nodes in the graph/network will be connected.
-    - Ex: a network of five nodes will be interconnected with each other, So we can just reach any node in a single jump from the root node.
-    - the major advantage of this approach is that every node in the network is just a jump away from the root node which makes for super-fast performance.
-    - on the way to correct HDBMS drawbacks NDBMS created its own drawbacks the major one being that increase in Complexity makes the network more congested and tough to navigate.
-    - The processing power needed was exponential for every multiple node added to the network.
-
-3. RDBMS: Relational DBMS is another DBMS proposed in 1980 to mitigate the problems of NDBMS and it did.
-    - This System started storing data in tables, even a single data is being stored as an item in a table.
-    - this made things easy to imagine and implement as we are already familiar with tables.
-    - This System works by connecting to multiple tables with relations between for better communications.
-    - As time grew this DBMS got popular and is the major Dominate in the Database industry.
-    - RDBMS just like NDBMS, HDBMS is a concept implementation of DBMS, still not the actual software.
-    - There are some Implementations of RDBMS that are being used in the industry.
-    - Oracle being the most used for enterprise software, MySQL for opensource software, PostgreSQL for startups and database beginners, MariaDB is another popular DBMS that is gaining popularity nowadays.
-    - In this tutorial we are learning Oracle database SQL 10g.10g,11i,12g are the most used oracle versions even though 19c/20c are available, so won't be irrelevant but still need to be updated on the latest changes to the oracle database.
-
-SQL:(SEQUEL) SQL is a Structured programming language used to communicate to our DBMS software. Since the DBMS software manages the database, it is not safe to open it to anyone who wants to access it.
+SQL is a Structured programming language used to communicate to our DBMS software. Since the DBMS software manages the database, it is not safe to open it to anyone who wants to access it.
 So Many industry leaders/enthusiasts created a common language so that any implementation of RDBMS can be used with it.
 This was Standard English Query Language or SEQUEL pronounced see-quel but later found that it was already a trademark for another company making car engines.
 So
