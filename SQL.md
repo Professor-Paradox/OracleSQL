@@ -1,22 +1,38 @@
-To use Oracle SQL we need to install it first.
-We can use Oracle SQL in multiple ways.
 
-- In web version on [https://livesql.oracle.com/](https://livesql.oracle.com/)
-- Installing on a vm/docker and connecting it via ssh or https to work with it.
-- Installing on your local machine just like an another software and work with it.
 
-In this iam giving all working details on how to install and setup on linux and windows.
+## Installation  
 
-We can use oracle 11g on either terminal or a gui tool. It is preferred to learn in terminal and work in gui for easy use.
+To use Oracle SQL we need a database and an interface to communicate with that database.  
 
-There are two tools to install in ubuntu 20.04.
-1. **Oracle 11g database**
-- download oracle 11g linux zip
-- `unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip` to extract the file
-- `sudo apt-get install alien libaio1 unixodbc` to install required packages
-- convert rpm file to deb file with `cd Disk1` `sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm`
-- Now we have to setup the environment for oracle database to work with.
-- create a file `sudo nano /sbin/chkconfig` and add these lines to that file.
+Few of the options to use Oracle SQL to learn are  
+
+- In a web version, officially provided by oracle on [https://livesql.oracle.com/](https://livesql.oracle.com/)
+- Installing on a vm/docker and connecting it via ssh or https to work with it.(this is good for experimentation)  
+- Installing on your local machine just like an another software and work with it.(Preferred)  
+
+Currently Iam focusing on Installing oracle 11xe on ubuntu 20.04 and windows 10.  
+
+### Ubuntu 20.04 Installation  
+
+We need to softwares to use oracle 11g-xe in ubuntu 20.04.  
+1. Oracle 11g-xe software package
+2. Sqldeveloper latest version
+
+To successfully complete the installation of both softwares we need oracle java 8 or above.  
+This java jdk must be oracle's only, openjdk 8 or above doesn't have some libraries installed by default with them.  
+So avoid any hasell and install oracle java jdk 11 from [here](https://www.oracle.com/in/java/technologies/javase-jdk11-downloads.html).  
+
+
+#### **Oracle 11g-xe installation(ubuntu)**  
+
+- First download oracle 11xe for ubuntu from [https://www.oracle.com/in/database/technologies/xe-prior-releases.html](https://www.oracle.com/in/database/technologies/xe-prior-releases.html)  
+- Download the oracle 11g linux zip file.  
+- `unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip` to extract the file, this will give us a rpm file, which can't be installed in ubuntu.  
+- So we convert rpm to deb, which can be installed in ubuntu.  
+- `sudo apt-get install alien libaio1 unixodbc` to install required packages.  
+- convert rpm file to deb file with `cd Disk1` `sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm`  
+- Now we got the deb package to install oracle 11g, but before installing it we need to setup some environment properties.  
+- `sudo nano /sbin/chkconfig` and add these lines to that file.  
 ```bash
 #!/bin/bash
 # Oracle 11gR2 XE installer chkconfig hack for Ubuntu
@@ -33,23 +49,26 @@ echo '# Short-Description: Oracle 11g Express Edition' >> $file
 echo '### END INIT INFO' >> $file
 fi
 update-rc.d oracle-xe defaults 80 01
-```
-- give this file appropriate permissions. `sudo chmod 755 /sbin/chkconfig`
-- we need kernel permissions for oracle database do this to create a file and provide this code.
-- `sudo nano /etc/sysctl.d/60-oracle.conf`
+```  
+
+- Provide this file appropriate permissions. `sudo chmod 755 /sbin/chkconfig`  
+- Oracle 11g needs kernel permission to run, create a file and paste this code in this.  
+- `sudo nano /etc/sysctl.d/60-oracle.conf`  
 ```bash
 # Oracle 11g XE kernel parameters  
 fs.file-max=6815744  
 net.ipv4.ip_local_port_range=9000 65000  
 kernel.sem=250 32000 100 128 
 kernel.shmmax=536870912 
-```
-- load these kernel permission to database 
-- `sudo service procps start`
-- verify the file data and kernel permissions 
-- `sudo cat /etc/sysctl.d/60-oracle.conf` 
-- `sudo sysctl -q fs.file-max` the file-max value in 60-oracle.conf and this value should match
-- setup the mount point for the database to connect to create file `sudo nano /etc/rc2.d/S01shm_load`, paste these lines in it
+```  
+
+- Now start these kernel permissions `sudo service procps start`
+- verify the file and kernel permissions are correct.  
+- `sudo cat /etc/sysctl.d/60-oracle.conf`, `sudo sysctl -q fs.file-max`.  
+- The file-max value in 60-oracle.conf and the output max value should match. If not then a reboot should fix the problem.  
+- setup a mount point for the database to connect to shell.  
+- create file `sudo nano /etc/rc2.d/S01shm_load`, paste these lines in it  
+
 ```bash
 #!/bin/sh
 case "$1" in
@@ -61,20 +80,21 @@ start) mkdir /var/lock/subsys 2>/dev/null
 *) echo error
    exit 1 ;;
 esac 
-```
-- provide permission to this file `sudo chmod 755 /etc/rc2.d/S01shm_load`
-- create links to files
-```bash
-sudo mkdir /var/lock/subsys 
-sudo touch /var/lock/subsys/listener 
-```
-- reboot the system now this will get all the data and permissions ready for oracle actual installation
-- `sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb`
-- after installing configure the setup with current environment `sudo /etc/init.d/oracle-xe configure`
-- it will ask for information of configuration give this, give first two default hit enter twice.
-- give a valid and good password for our database this is important so remember and write somewhere and hit no for oracle starting on boot as it takes ram usage without actual need.
-- now setup the terminal environment to access oracle shell from it edit the bash shell properties
-- `nano ~/.bashrc` paste these lines at the end of the file
+```  
+
+- provide permissions to this file `sudo chmod 755 /etc/rc2.d/S01shm_load`  
+- create links to files `sudo mkdir /var/lock/subsys` ,`sudo touch /var/lock/subsys/listener`.  
+
+
+- reboot the system now(must), this will get all the data and permissions ready for oracle actual installation.  
+- go to the oracle folder and type this in a terminal `sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb`.  
+- after done installing, provide the setup with current environment properties `sudo /etc/init.d/oracle-xe configure`  
+- Few questions will be asked while configuring the installation. This is an important part, note all the details for future use.  
+- give first two options default values by hitting enter twice.  
+- Then it will ask for a root password of the database, the root user is 'sys' or 'sysdba', password should be valid and strong. Remember this. (sysdba/pass)  
+- hit no, when asked to start oracle on boot of system.  
+- Now link oracle shell to our actual shell.  
+- `nano ~/.bashrc` paste these lines at the end of the file  
 ```bash
 # oracle database properties 
 export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
@@ -83,48 +103,72 @@ export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
 export ORACLE_BASE=/u01/app/oracle
 export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
 export PATH=$ORACLE_HOME/bin:$PATH
-```
-- apply the permission with `. ~/.bashrc`
-- start the oracle service `sudo service oracle-xe start`
-- add your current user account to the oracle dba user group for accessing the service `sudo usermod -a -G dba <YOURUSERNAME>`
-- the installation is now done
-- This is the way to use it `sudo service oracle-xe start`
-- login the shell with `sqlplus sys as sysdba` then oracle will ask for the password this is the same password we gave before.
-- This is the root account of the database and should be used carefully, not used for regular purposes for that it is adviced we create a new account, only use this account for emergency and database managements. 
-- to create a new user `create user t identified by 0000;`
+```  
+
+- update the permission with `. ~/.bashrc`
+- start the oracle service `sudo service oracle-xe start`  
+- Add current user account to the oracle dba user group, this makes accessing the service possible. 
+- `sudo usermod -a -G dba <YOURUSERNAME>`.  
+- Oracle 11g installation is now done  
+
+**User Creation**  
+
+- To use the database, make sure the service started correctly with `sudo service oracle-xe start`.  
+- login the shell with `sqlplus sys as sysdba`, this is the root account so be careful what operations you perform.  
+- Enter the root password(pass), this is the same password we gave before.  
+- So to avoid any catestrophic failures, it is preferred to create a non root account for all database actions. 
+- Only use root account for emergency and managements.  
+- create a new user `create user t identified by 0000;` while using sqlplus.  
 - then grant appropriate permission you need on this account. 
 ```sql
 grant create session, grant any privilege to t;
 grant unlimited tablespace to t;
 grant create table to t;
 grant connect, resource to t;
-```
-- exit the shell with `exit;` and connect with new user account and practice the sql.
-- Remember there is no sample data available on this database to practice so we need to create them on our own.
+```  
 
-1. **Oracle sqldeveloper latest version.**
-- download the latest version of sqldeveloper for other platforms from oracle website and have oracle jdk installed not open jdk as this needs some tools that are present in oracle jdk and have to manually installed for open jdk.
-- extract the zip to opt directory `cd /opt` `sudo unzip ~/Downloads/sqldeveloper-20.2.0.175.1842-no-jre.zip`
-- This will create a directory sqldeveloper in opt folder.
-- We need to supply the java bin path to sqldeveloper so find and copy the path.
-- In ubuntu it is most probably in `/usr/lib/jvm/jdk-11.0.9/`.
-- Then run the sqldeveloper.sh file in directory
-- If asked for the jdk path paste the above path here
+- exit the shell with `exit;` and connect with new user account and practice the sql.
+
+**Usage**  
+
+Oracle 11g can be used from default terminal, sqlplus terminal, sqldeveloper tool(gui).  
+It is preferred to first learn in terminal/sqlplus, after mastering it move on to gui for easy use.  
+
+- Connect to user account with `sqlplus t/0000`, this account has enough permissions to use database without restrictions.  
+- Remember there is no sample data available on this database(Oracle 11g-xe) to practice.  
+- So we need to create them on our own.
+
+
+#### Oracle sqldeveloper(Ubuntu) Installation
+
+While Database we are using is Oracle 11g-xe, we can use the latest SqlDeveloper with out any problems.  
+
+- Download the latest version of sqldeveloper from [https://www.oracle.com/tools/downloads/sqldev-downloads.html](https://www.oracle.com/tools/downloads/sqldev-downloads.html), download the other platforms zip file.  
+- As mentioned above we need oracle jdk 11 or newer installed for this to work correctly.  
+- Extract the zip to opt directory with `cd /opt`, `sudo unzip ~/Downloads/sqldeveloper-20.2.0.175.1842-no-jre.zip`.  
+- Now all the files of sqldeveloper zip are copied to /opt/sqldeveloper directory, verify that with `ls /opt/sqldeveloper`.  
+- Now link the java jdk path to sqldeveloper executable.  
+- Copy the path of java jdk, in ubuntu the path is similar to `/usr/lib/jvm/jdk-11.0.9/`.  
+- Run `./sqldeveloper.sh` file.  
+- If asked for the jdk path paste the above path.  
 - But it would be annoying to run the program by going to the path every time,instead lets create a shortcut.
 - `sudo ln -s /opt/sqldeveloper/sqldeveloper.sh /usr/local/bin/sqldeveloper`
 - After this run `sqldeveloper` in terminal as it is now available globally, but will give an error as the file sqldeveloper.sh has a relative path to sqldeveloper.
 - We now change it to absolute by editing it. run these
-- `sudo nano /opt/sqldeveloper/sqldeveloper.sh` and paste this or edit the file to look like this and save it.
+- `sudo nano /opt/sqldeveloper/sqldeveloper.sh` and paste this or edit the file to look like this and save it.  
+
 ```bash
 #!/bin/bash
 #cd "`dirname $0`"/sqldeveloper/bin && bash sqldeveloper $*
-/opt/sqldeveloper/sqldeveloper/bin/sqldeveloper $*
+/opt/sqldeveloper/sqldeveloper/bin/sqldeveloper $*  
 ```
+
 - now try running `sqldeveloper` in terminal, this will launch the software without any errors.
 - Now lets create a desktop shortcut to launch the software from gui.
 - run `sudo nano /usr/share/applications/sqldeveloper.desktop`
 - paste these lines to create a shortcut and save the file
-```
+
+```bash
 [Desktop Entry]
 Name=Oracle SQL Developer
 GenericName=SQL Tool
@@ -133,8 +177,14 @@ Icon=/opt/sqldeveloper/icon.png
 Type=Application
 StartupNotify=true
 Categories=Development;
-```
+```  
+
 - Thats it now the sqldeveloper is installed properly and can be used with desktop search shortcut.
+
+
+
+
+
 
 
 Data: Information about some facts.
@@ -410,5 +460,3 @@ select * from emp where sal = ANY(1000,2000,3000);
 
 
 ```
-
-

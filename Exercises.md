@@ -1,13 +1,13 @@
 **Standard Queries**
 
-> Note: All these commands are being run on oracle 10g sqlplus version
+> Note: All these commands are being run on oracle 10g SQLplus version
 
 1.  <details>
     <summary>
         Display all the data in the employee table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2 from emp;
         EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
@@ -36,7 +36,7 @@
         Display any one column from the emp table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename
       2 from emp;
 
@@ -67,7 +67,7 @@
         Display any two columns from the emp table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename,job
       2 from emp;
 
@@ -98,7 +98,7 @@
         Display all data from department table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2 from emp;
 
@@ -117,7 +117,7 @@
         Display any one column from the dept table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select dname
       2 from emp;
 
@@ -136,7 +136,7 @@
         Display any two columns from the dept table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select dname,loc
       2 from emp;
 
@@ -155,7 +155,7 @@
         Display all Employee names?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename
       2 from emp;
 
@@ -186,7 +186,7 @@
         Display Employee names and their salaries?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename,sal
       2 from emp;
 
@@ -217,7 +217,7 @@
         Display all department's names?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select dname
       2 from emp;
 
@@ -236,7 +236,7 @@
         Display Location of all departments?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select dname,loc
       2 from emp;
 
@@ -255,7 +255,7 @@
         Display Employee numbers and employee names?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select empno,ename
       2 from emp;
 
@@ -286,7 +286,7 @@
         Display Employee names as "Name"?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name"
       2 from emp;
 
@@ -317,7 +317,7 @@
         Display sal as salary, hire date as joining date for all employees?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename Name, sal as "Salary",hiredate "Joined On"
       2 from emp;
 
@@ -348,7 +348,7 @@
         Display employee name, employee number, sal as monthly salary, department number for all employees?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",empno ID, sal "Monthly Salary", deptno
       2  from emp;
 
@@ -379,7 +379,7 @@
         Display all employee details in the format "xxx(name) is xxx(job)"?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename || ' is a ' || job
       2  from emp;
 
@@ -410,7 +410,7 @@
         Display employee name and salary of all employees?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",sal "Salary"
       2  from emp;
 
@@ -441,7 +441,7 @@
         Display name, salary, commission, and date of joining of all employees?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",sal "Salary",comm "Commission",hiredate "Joined On"
       2  from emp;
 
@@ -472,7 +472,7 @@
         Display employee name, designation, manager's employee number?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",job,mgr "Manager ID"
       2  from emp;
 
@@ -503,7 +503,7 @@
         Display employee name and department number?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",deptno
       2  from emp;
 
@@ -534,7 +534,7 @@
         Display all details of each employee?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp;
 
@@ -565,7 +565,7 @@
         Display all details of company departments?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from dept;
 
@@ -584,7 +584,7 @@
         Display employee name, employee number, salary, the annual salary of all employees?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",empno "ID",sal "Salary",sal*12 "Annual Salary"
       2  from emp;
 
@@ -615,7 +615,7 @@
         Display the employee name, employee number, salary, salary with a 30% hike for all employees?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",empno "ID",sal "Salary",sal*1.30 "Hiked Salary"
       2  from emp;
 
@@ -648,7 +648,7 @@
             "employee xxx earns a monthly salary of xxx rupees"
         </summary>
 
-        ```sql
+        ```SQL
         SQL> select ename||' earns a monthly salary of '||sal||' rupees'
           2  from emp;
 
@@ -679,7 +679,7 @@
             "employee xxx earns a monthly salary of xxx rupees and annual salary of xxx rupees"
         </summary>
 
-        ```sql
+        ```SQL
         SQL> select ename||' earns a monthly salary of '||sal||' rupees and annual salary of '||sal*12||' rupees'
           2  from emp;
 
@@ -710,7 +710,7 @@
             "the xxx department with department number xxx is located in xxx"
         </summary>
 
-        ```sql
+        ```SQL
         SQL> select 'The '||dname||' department with department number '||deptno||' is located in '||loc
           2  from dept;
 
@@ -729,7 +729,7 @@
         Display the name of the employee, monthly salary, a monthly bonus of 200, annual salary(bonus included) with suitable alias names?
     </summary>
 
-    ```sql
+    ```SQL
         SQL> select ename "Name",sal "Monthly Salary",sal+200 "Monthly Salary(Bonus)",(sal+200)*12 "Annual Salary(Bonus)"
           2  from emp;
 
@@ -760,7 +760,7 @@
         Display the name of the employee, salary, annual salary, annual salary with a yearly bonus of 100?
     </summary>
 
-    ```sql
+    ```SQL
         SQL> select ename "Name",sal "Monthly Salary",sal*12 "Annual Salary",(sal*12)+100 "Annual Salary(Bonus)"
           2  from emp;
 
@@ -791,7 +791,7 @@
         Display All Information of Scott?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename='SCOTT';
@@ -808,7 +808,7 @@
         Display Adams Job?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",job
       2  from emp
       3  where ename='ADAMS';
@@ -825,7 +825,7 @@
         Display miller's salary and department?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",sal "Monthly Salary",deptno
       2  from emp
       3  where ename='MILLER';
@@ -842,7 +842,7 @@
         Display Names of all clerks?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",job
       2  from emp
       3  where job='CLERK';
@@ -862,7 +862,7 @@
         Display all employee details working in department number 20?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where deptno=20;
@@ -883,7 +883,7 @@
         Display employee names whose salary is more than 1500?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",sal
       2  from emp
       3  where sal>1500;
@@ -908,7 +908,7 @@
         Display employee name, job, the salary of an employee with employee id 7902?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select empno,ename "Name",job,sal "Monthly Salary"
       2  from emp
       3  where empno=7902;
@@ -925,7 +925,7 @@
         Display all employee's information who joined on 30-dec-1981?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where hiredate='30-DEC-1981';
@@ -940,7 +940,7 @@
         Display all details of analysts?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where job='ANALYST';
@@ -958,7 +958,7 @@
         Display all information of employees who work under a manager with employee id 7698?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where mgr=7698;
@@ -979,7 +979,7 @@
         Display all Employee names whose salary is less than 1500?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",sal
       2  from emp
       3  where sal<1500;
@@ -1003,7 +1003,7 @@
         Display Employee name, hire date, salary, annual salary if his annual salary is more than 10,000?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",hiredate "Joined On",sal "Monthly Salary",sal*12 "Annual Salary"
       2  from emp
       3  where sal*12 > 10000;
@@ -1034,7 +1034,7 @@
         Display all details of managers?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where job='MANAGER';
@@ -1053,7 +1053,7 @@
         Display details of all employees who are hired after 1995?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where hiredate > '31-DEC-1995';
@@ -1068,7 +1068,7 @@
         Display employee's details whose comm is exactly 1400?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where comm=1400;
@@ -1085,7 +1085,7 @@
         Display clerk details working in department 20?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where job='CLERK' and deptno=20;
@@ -1103,7 +1103,7 @@
         Display employee details who work in department 20 and earn more than 1500?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where deptno=20 and sal>1500;
@@ -1122,7 +1122,7 @@
         Display employee names working in department 10,30? (without special operators)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",deptno
       2  from emp
       3  where deptno=10 or deptno=30;
@@ -1149,7 +1149,7 @@
         Display managers and analyst information? (without special operators)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where job='ANALYST' or job='MANAGER';
@@ -1170,7 +1170,7 @@
         Display employee details who earn between 1000 and 2000(Inclusive)? (without special operators)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where sal>=1000 and sal<=2000;
@@ -1194,7 +1194,7 @@
         Display employee details who joined in the year 1981? (without special operators)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where hiredate>='01-JAN-1981' and hiredate<='31-DEC-1981';
@@ -1222,7 +1222,7 @@
         Display employee names working in department 10,30?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where deptno in (10,30);
@@ -1249,7 +1249,7 @@
         Display managers and analyst information?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where job in ('ANALYST','MANAGER');
@@ -1270,7 +1270,7 @@
         Display employee details who earn between 1000 and 2000(Inclusive)?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where sal between 1000 and 2000;
@@ -1294,7 +1294,7 @@
         Display employee details who joined in the year 1981?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where hiredate like '%81%';
@@ -1322,7 +1322,7 @@
         Display employee name, salary, annual salary, annual salary with 25% hike for clerks, and joining date is 16 June 1982?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",sal "Salary",sal*12 "Annual Salary",(sal*12)*1.25 "Annual Salary(Hiked)"
       2  from emp
       3  where job='CLERK' and hiredate='16-JUN-1982';
@@ -1337,7 +1337,7 @@
         Display employee details if the annual salary is greater than 15,000 and commission is greater than his salary?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where sal*12>15000 and comm>sal;
@@ -1352,7 +1352,7 @@
         Display all details for department number 100 or department name is research?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from dept
       3  where deptno=100 or dname='RESEARCH';
@@ -1369,7 +1369,7 @@
         Display employee name, employee number, hire date, salary, salary with 20% pay cut if his salary is greater than 2500 and works in department number 10.
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",empno "ID",hiredate "Joined On",sal "Salary",sal*0.80 "Deducted Salary"
       2  from emp
       3  where sal>2500 and deptno=10;
@@ -1386,7 +1386,7 @@
         Display details who work in either department 10 or 20 and earn more than 2,000?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where deptno in (10,20) and sal>2000;
@@ -1407,7 +1407,7 @@
         Display all details of salesman and analysts?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where job in ('SALESMAN','ANALYST');
@@ -1431,7 +1431,7 @@
         Display details of salesman and analyst if they are working in department number 10 or 20 and earn more than 2,000?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where job in ('SALESMAN','ANALYST') and deptno in (10,20) and sal>2000;
@@ -1449,7 +1449,7 @@
         Display details of salesman and clerk who earns more than 3,000 and doesn't earn exactly 2,500, having depart number 10,20,30?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where job in ('SALESMAN','CLERK') and sal>3000 and sal!=2500 and deptno in (10,20,30);
@@ -1464,7 +1464,7 @@
         Display all clerks name, job, commission, department number, salary, salary with 35% cut and works in depart number 10 or 20 or 30, having hired after 1983 and commission is less than salary?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",job,comm "Commission",deptno "Department Number",sal "Salary",sal*0.65 "Reduced Salary"
       2  from emp
       3  where deptno in (10,20,30) and hiredate>'31-DEC-1983' and comm<sal;
@@ -1479,7 +1479,7 @@
         Display employee details who are working in department 10 or 20 or 30?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where deptno in (10,20,30);
@@ -1511,7 +1511,7 @@
         Display all employee details working in department 10 or 20 and has a commission between 1000 and 3000, were hired between 1980-1983?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where deptno in (10,20) and comm between 1000 and 3000 and hiredate between '01-JAN-1980' and '31-DEC-1983';
@@ -1526,7 +1526,7 @@
         Display employee details who don't have a manager?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where mgr is null;
@@ -1543,7 +1543,7 @@
         Display employee details who don't take a commission?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where comm is null;
@@ -1571,7 +1571,7 @@
         Display employee details whose name starts with 'A'?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like 'A%';
@@ -1589,7 +1589,7 @@
         Display employee details whose name starts and ends with 'A'?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like 'A%A';
@@ -1604,7 +1604,7 @@
         Display employee details who has at least two 'A's in their name?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like '%A%A';
@@ -1619,7 +1619,7 @@
         Display employee details whose name starts with 'M'?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like 'M%';
@@ -1637,7 +1637,7 @@
         Display employee details whose name contains 'MAD'?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like '%MAD%';
@@ -1652,7 +1652,7 @@
         Display employee details whose name contains 'NA' at least once?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like '%NA%';
@@ -1667,7 +1667,7 @@
         Display employee details whose name has 'R' as the second last character?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like '%R_';
@@ -1686,7 +1686,7 @@
         Display employee details whose name starts with 'S'?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like 'S%';
@@ -1704,7 +1704,7 @@
         Display employee details whose name has 'L' as the second character?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like '_L%';
@@ -1723,7 +1723,7 @@
         Display employee details whose name has 'L' at least twice?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like '%L%L%';
@@ -1741,7 +1741,7 @@
        Display employee details whose name has 'E' as the last but one character?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like '%E_';
@@ -1762,7 +1762,7 @@
         Display employee details whose name has 'R' in the 3rd position?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where ename like '___R%';
@@ -1779,7 +1779,7 @@
         Display the first letter of every employee's name?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",substr(ename,1,1) "First Character"
       2  from emp;
 
@@ -1810,7 +1810,7 @@
         Display the Last letter of every employee's name?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",substr(ename,-1,1) "Last Character"
       2  from emp;
 
@@ -1841,7 +1841,7 @@
         Display the Last letter of every employee's name without using -1 in the substring?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",length(ename) "Length(Name)",substr(ename,length(ename)) "Last Char"
       2  from emp;
 
@@ -1872,7 +1872,7 @@
         Display the first three characters of every job?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select job,substr(job,1,3)
       2  from emp;
 
@@ -1903,7 +1903,7 @@
         Display employee names after removing 'A' from it?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",replace(ename,'A') "Removed A"
       2  from emp;
 
@@ -1934,7 +1934,7 @@
         Display the number of 'A' characters present in each employee name?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",replace(ename,'A') "Removed A",length(replace(ename,'A')) "Length After"
       2  from emp;
 
@@ -1965,7 +1965,7 @@
         Display employee names having exactly 4 character length? (without using Like)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where length(ename)=4;
@@ -1984,7 +1984,7 @@
         Display employee names and jobs where the job starts with 'MAN'?(without using like)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where substr(job,1,3)='MAN';
@@ -2003,7 +2003,7 @@
         Display employee details who joined in February? (without using like)?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where substr(hiredate,4,3)='FEB';
@@ -2021,7 +2021,7 @@
         Display employee details whose name has 'E' as last but one character? (without like)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where substr(ename,-2,1)='E';
@@ -2042,7 +2042,7 @@
         Count number of A's in each employee name?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",length(ename) "Length",replace(ename,'A') "Removed A",length(replace(ename,'A')) "Replaced Length"
       2  from emp;
 
@@ -2073,7 +2073,7 @@
         Display position of first M character in employee name?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",instr(ename,'M',1,1) "M Index"
       2  from emp;
 
@@ -2104,7 +2104,7 @@
         Display all employee names starting with 'A' using instring function?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where instr(ename,'A')=1;
@@ -2122,7 +2122,7 @@
         Display employee whose job has MAN?(with out like)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where length(job)!=length(replace(job,'MAN'));
@@ -2147,7 +2147,7 @@
         Display employee details whose name has 'L'?(With out like)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where length(ename)>length(replace(ename,'L'));
@@ -2167,7 +2167,7 @@
         Display the total salary of all employees(salary+commission)? (output should be numerical, not null value)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",sal "Salary",nvl(comm,0) "Commission",sal+nvl(comm,0) "Commission+Salary"
       2  from emp;
 
@@ -2198,7 +2198,7 @@
         Display employee names, salary, hire date, total working days till today?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",sal "Salary",hiredate "Joined On",sysdate "Today",trunc(sysdate-hiredate) "Working Days"
       2  from emp;
 
@@ -2229,7 +2229,7 @@
         Display employee details who worked more than 12,000 days?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",hiredate "Joined On",sysdate "Today",trunc(sysdate-hiredate) "Working Days"
       2  from emp
       3  where trunc(sysdate-hiredate)>12000;
@@ -2261,7 +2261,7 @@
         Display employee names, salary, years of experience of all employees?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select ename "Name",sal "Salary",hiredate "Joined On",sysdate "Today",trunc((sysdate-hiredate)/365) "Years of Experience"
       2  from emp;
 
@@ -2292,7 +2292,7 @@
         Display employee details who joined on 1-may-1981,3-dec-1981,17-dec-1981,19-Jan-1980 in order of seniority?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where hiredate in ('01-MAY-1981','03-DEC-1981','17-DEC-1981','19-JAN-1980')
@@ -2312,7 +2312,7 @@
         Display employee details in order of designation who were hired in the second half of 1981? (1-Jul-1981+)
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where hiredate>'01-JUN-1981'
@@ -2340,7 +2340,7 @@
         Display employees who don't belong to department 20?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp
       3  where deptno not in 20;
@@ -2367,7 +2367,7 @@
         Display the total number of employees?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select count(ename)
       2  from emp;
 
@@ -2383,7 +2383,7 @@
         Display average salary of department 20?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select avg(sal),deptno
       2  from emp
       3  group by deptno
@@ -2401,7 +2401,7 @@
         Display the least salary earned by the manager?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select min(sal) "Least Salary",job
       2  from emp
       3  group by job
@@ -2419,7 +2419,7 @@
         Display total salary earned by employees who joined in 1981?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select sum(sal) "Total Salary",substr(hiredate,-2)
       2  from emp
       3  group by substr(hiredate,-2)
@@ -2437,7 +2437,7 @@
         Display all employees in department number 10?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select count(ename),deptno
       2  from emp
       3  group by deptno;
@@ -2456,7 +2456,7 @@
         Display the number of employees in each department?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select count(ename),job
       2  from emp
       3  group by job;
@@ -2477,7 +2477,7 @@
         Display the number of employees with the same job title?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select max(sal),job
       2  from emp
       3  group by job;
@@ -2498,7 +2498,7 @@
         Display max salary earned in each job designation?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select max(sal),job
       2  from emp
       3  group by job;
@@ -2519,7 +2519,7 @@
         Display the number of employees in each job designation and have 3 or more employees with the same designation?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select count(ename),job
       2  from emp
       3  group by job
@@ -2539,7 +2539,7 @@
         Display total salary of each department if its total salary is greater than/equal to 9,000?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select sum(sal),deptno
       2  from emp
       3  group by deptno
@@ -2558,7 +2558,7 @@
         Display employee name and his department name?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select e.ename "Name",d.dname "Department Name"
       2  from emp e,dept d
       3  where e.deptno=d.deptno;
@@ -2590,7 +2590,7 @@
         Display employee name,department location, department number?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select e.ename "Name",d.loc "Dept Location",d.dname "Dept Name"
       2  from emp e,dept d
       3  where e.deptno=d.deptno;
@@ -2622,7 +2622,7 @@
         Display employee name, department name of all salesmen?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select e.ename "Name",d.dname "Dept Name"
       2  from emp e,dept d
       3  where e.deptno=d.deptno and e.job='SALESMAN';
@@ -2643,7 +2643,7 @@
         Display Non-Equi joining two tables?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp,salgrade
       3  where sal between losal and hisal;
@@ -2675,7 +2675,7 @@
         Display Cross joining two tables?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp,dept;
 
@@ -2748,7 +2748,7 @@
         Display Inner joining two tables?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select * from emp e,dept d
       2  where e.deptno=d.deptno;
 
@@ -2779,7 +2779,7 @@
         Display left outer join on two tables?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp e,dept d
       3  where e.deptno=d.deptno(+);
@@ -2811,7 +2811,7 @@
         Display right outer join on two tables?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp e,dept d
       3  where e.deptno(+)=d.deptno;
@@ -2844,7 +2844,7 @@
         Display full outer join on two tables?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from emp e
       3  full outer join dept d on e.deptno=d.deptno;
@@ -2877,7 +2877,7 @@
         Create a table with 3 columns and appropriate datatypes and constraints?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> create table sbranch(branchno number(3) primary key,bname varchar(20) not null,hod varchar(20));
     Table created.
 
@@ -2896,7 +2896,7 @@
         Create a table referring above table with a foreign key?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> create table stu420(Id number(5) primary key,sname varchar(30) not null,branch references sbranch(branchno));
     Table created.
 
@@ -2915,7 +2915,7 @@
         Change the first table name?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> rename stu420 to student;
     Table renamed.
 
@@ -2934,7 +2934,7 @@
         Change one column name in the first table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> desc student;
     Name                                                                    Null?    Type
     ----------------------------------------------------------------------- -------- -------------
@@ -2960,7 +2960,7 @@
         Add an extra column to the second table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> desc sbranch;
     Name                                                                    Null?    Type
     ----------------------------------------------------------------------- -------- ------------
@@ -2987,7 +2987,7 @@
         Delete one column from the first table
     </summary>
 
-    ```sql
+    ```SQL
     SQL> desc sbranch;
     Name                                                                    Null?    Type
     ----------------------------------------------------------------------- -------- ------------
@@ -3014,7 +3014,7 @@
         Change the datatype of any one column from the second table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> desc student;
     Name                                                                    Null?    Type
     ----------------------------------------------------------------------- -------- --------------
@@ -3030,7 +3030,7 @@
         Drop the second table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> desc student;
     Name                                                                    Null?    Type
     ----------------------------------------------------------------------- -------- -----------
@@ -3053,7 +3053,7 @@
         Insert 5 records into the first table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> desc sbranch;
     Name                                                                    Null?    Type
     ----------------------------------------------------------------------- -------- -------------
@@ -3089,7 +3089,7 @@
         Update 3rd record of the first table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from sbranch;
 
@@ -3117,7 +3117,7 @@
         Delete 2nd record of the first table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> delete sbranch where bname='mech';
     1 row deleted.
 
@@ -3136,7 +3136,7 @@
         Truncate the first table?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select *
       2  from sbranch;
 
@@ -3158,35 +3158,35 @@
     <summary>
         Grant select privileges on the first table to hr?
     </summary>
-    <img src="./img/Queries/125.png" alt="125 Ans">
+    <img src="./img/Queries/1.png" alt="1 Ans">
     </details>
 
 1.  <details>
     <summary>
         Check if the hr user has select and not any more privileges on the first table?
     </summary>
-    <img src="./img/Queries/126.png" alt="126 Ans">
+    <img src="./img/Queries/2.png" alt="2 Ans">
     </details>
 
 1.  <details>
     <summary>
         Revoke select privileges on the first table to hr?
     </summary>
-    <img src="./img/Queries/127.png" alt="127 Ans">
+    <img src="./img/Queries/3.png" alt="3 Ans">
     </details>
 
 1.  <details>
     <summary>
         Check if hr user no longer has select privileges on the first table?
     </summary>
-    <img src="./img/Queries/128.png" alt="128 Ans">
+    <img src="./img/Queries/4.png" alt="4 Ans">
     </details>
 
 1.  <details>
     <summary>
         Commit and insert 5 records in the first table, create an individual savepoint for each record, and rollback to each one?
     </summary>
-    <img src="./img/Queries/129.png" alt="129 Ans">
+    <img src="./img/Queries/5.png" alt="5 Ans">
     </details>
 
 1.  <details>
@@ -3194,7 +3194,7 @@
         Display details of managers and their higher authorities?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select e.ename "Name",e.empno "ID",e.job "Job",m.ename "Reports To",m.empno "ID",m.job "Job"
       2  from emp e,emp m
       3  where e.job='MANAGER' and e.mgr=m.empno;
@@ -3215,7 +3215,7 @@
         Display Employee details with the third-highest salary?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select empno,ename,job,mgr,hiredate,sal,comm,deptno,rownum
       2  from emp;
 
@@ -3238,7 +3238,7 @@
 
     14 rows selected.
 
-    -- There is a default counter called rownum, added for each output row of query
+    -- There is a default counter called rownum, added for each output row of the query
     -- this is given in order of execution
 
     SQL> select rownum id,sal,empno,ename,job,mgr,hiredate,comm,deptno
@@ -3265,10 +3265,10 @@
            14        800       7369 SMITH      CLERK           7902 17-DEC-80                    20
 
     14 rows selected.
-    -- To get any type of output we go three level deep sub-query.
-    -- In first level(inner most) we take the data in a formatted way.
-    -- In second level(outer of 1st level) we add metadata needed, like rownum
-    -- In third level(outer most) we execute our query on this new table from second level.
+    -- To get any type of output we go three-level deep sub-query.
+    -- In the first level(innermost) we take the data in a formatted way.
+    -- In the second level(outer of 1st level) we add metadata needed, like rownum
+    -- In the third level(outermost) we execute our query on this new table from the second level.
 
     SQL> select *
       2  from
@@ -3321,7 +3321,7 @@
         Display details of Employee having max salary in all departments?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select max(sal)
       2  from emp
       3  group by deptno;
@@ -3356,7 +3356,7 @@
         Display Employee details having min salary in department 20?
     </summary>
 
-    ```sql
+    ```SQL
     SQL> select deptno,min(sal)
       2  from emp
       3  group by deptno;
@@ -3404,7 +3404,7 @@
         Create a trigger?
     </summary>
 
-    ```sql
+    ```SQL
 
     ```
 
