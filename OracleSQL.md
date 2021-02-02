@@ -1,122 +1,149 @@
+- [Oracle SQL](#oracle-sql)
+  - [HDBMS](#hdbms)
+  - [NDBMS](#ndbms)
+  - [RDBMS](#rdbms)
+  - [Installation](#installation)
+    - [Ubuntu 20.04 Installation](#ubuntu-2004-installation)
+      - [Oracle 11g-xe installation](#oracle-11g-xe-installation)
+      - [Oracle SQLDeveloper Installation](#oracle-sqldeveloper-installation)
+    - [Windows 10 Installation.](#windows-10-installation)
+      - [Oracle 10g Installation](#oracle-10g-installation)
+      - [Oracle 11g-xe Installation](#oracle-11g-xe-installation-1)
+      - [Windows SQLDeveloper installation](#windows-sqldeveloper-installation)
+    - [SQLPlus](#sqlplus)
+      - [Oracle 10g SQLPlus Useful Commands](#oracle-10g-sqlplus-useful-commands)
+  - [SQL](#sql)
+    - [History](#history)
+    - [DDL(Data Definition Language)](#ddldata-definition-language)
+      - [CREATE](#create)
+      - [ALTER](#alter)
+      - [TRUNCATE](#truncate)
+      - [RENAME](#rename)
+      - [DROP](#drop)
+    - [DML(Data Manipulation Language)](#dmldata-manipulation-language)
+    - [DCL(Data Control Language)](#dcldata-control-language)
+    - [DTL/TCL(Data Transaction Language/Transaction Control Language)](#dtltcldata-transaction-languagetransaction-control-language)
+    - [DQL(Data Query Language)](#dqldata-query-language)
+
 # Oracle SQL
 
 **Data:**  
-Data is Raw Facts, Details of an object.  
-Data can be a number, symbol, character, word  without context, Data has no meaning.  
-Ex: Student test score, Without context, we can't make use of this number.  
+Data means Raw Facts or Details of an object.  
+Data can be a number, symbol, character, word. Without context, Data has no meaning.  
+Ex: Student test score is Data, Without context, we can't make use of this number effectively.
 
 **Information:**  
 Information is Data put into context.  
-The information provides meaning, Information Changes depending on need.  
-Information can be Processed to get better understand of it.  
-Ex: Student average marks of a semester.  
+A piece of information provides meaning, Information can Change depending on need.  
+Information can be Processed to get a better understand of it.  
+Ex: Student average marks of a semester.
 
-**DataBase**  
+**Database**  
 A database is a systematic collection of data, organized for better usability.  
-A database is used for easy management and scalability of data.  
-A spreadsheet is a database, each table is a part of a database.  
+A database makes managing and scaling the data easily.  
+A spreadsheet is an example of a simple database, where each table is a part of the database.
 
-**Database management system(DBMS)**: is a software that is used to organize data in the database.  
+**Database Management System(DBMS)**: is a software that is used to organize data in the database.
 
-- DBMS is used to communicate to the actual database.  
-- DBMS can be considered a Concept, An Abstraction, and a hierarchical model.  
+-   DBMS is used to communicate with the actual database.
+-   DBMS can be considered a Concept, An Abstraction, and a hierarchical model.
 
-There are three types of DBMS.  
+There are three types of DBMS.
 
-## HDBMS  
+## HDBMS
 
-HDBMS is the first type of DBMS, Developed in the mid-1950s this was the earliest software implementation of DBMS.  
+HDBMS is the first type of DBMS, Developed in the mid-1950s this was the earliest software implementation of DBMS.
 
-- It works by storing each data record as a node, each node is connected hierarchically to one another, hence the name Hierarchical DBMS.  
-- Here the root node is the entry point of the database.  
-- The entire database can be visualized as a binary tree.  
-- We insert data from left to right of the leftmost node to the rightmost node.  
-- All the nodes are balanced first before inserting data into any other node, i.e each node should have two child nodes.  
+-   It works by storing each data record as a node, each node is connected hierarchically to another node, hence the name Hierarchical DBMS.
+-   Here the root node is the entry point of the database.
+-   The entire database can be visualized as a binary tree.
+-   We insert data from the left side to the right side of the hierarchy, and always fill from the leftmost node to the rightmost node.
+-   All the nodes are balanced first before inserting data into any other node, i.e each node should have two child nodes.
 
-**Drawbacks**   
+**Drawbacks**
 
-- The drawback of HDBMS is that it takes a lot of time to reach the last node of database.  
-- Another major drawback is that if the link between nodes is lost due to technical difficulties, it can't be accessed.  
-![HDBMS](./img/HDBMS.png)  
+-   The drawback of HDBMS is that it takes a lot of time to reach the last node of the database.
+-   Another major drawback is that if the link between nodes is lost due to technical difficulties, it can't be accessed.  
+     ![HDBMS](./img/HDBMS.png)
 
-## NDBMS  
+## NDBMS
 
 Network DBMS is an upgrade over the HDBMS.  
-It was designed to overcome the drawbacks of HDBMS.  
+It was designed to overcome the drawbacks of HDBMS.
 
-- NDBMS has all the features of HDBMS.  
-- To overcome the defects of HDBMS, in NDBMS each data node is connected to all other nodes.  
-- So that even if we lose one link between two nodes, we can access it from other node.  
-- This linking between all nodes is similar to that of a graph/network.  
-- Ex: a network of five nodes will be interconnected with each other, So we can just reach any node in a single jump from the root node.  
+-   NDBMS has all the features of HDBMS.
+-   To overcome the defects of HDBMS, in NDBMS each data node is connected to all other nodes.
+-   So that even if we lose one link between two nodes, we can access it from another node's link.
+-   This linking between all nodes is similar to that of a graph/network.
+-   Ex: a network of five nodes will be interconnected with each other, So we can just reach any node in a single jump from the root node.
 
-**Advantages**  
+**Advantages**
 
-- the major advantage of this approach is that every node in the network is just one jump away from the root node which makes it super-fast to access the node.  
+-   the major advantage of this approach is that every node in the network is just one jump away from the root node which makes it super-fast to access the node.
 
-**Drawbacks**  
+**Drawbacks**
 
-- The major drawback is that, the Complexity of the network makes accessing the node becomes congested.  
-- The processing power needed to access the node grows exponentially for every node added to the network.  
-- Consider a database with million records, where each node is connected with each other node, this creates a congested network.  
-![NDBMS](./img/NDBMS.jpg)  
+-   The major drawback is that as the nodes in the database increase the Complexity of the network also increases, this makes accessing the node difficult.
+-   The processing power needed to access the node grows exponentially for every node added to the network.
+-   Consider a database with million records, where each node is connected with each other node, this creates a congested network.  
+     ![NDBMS](./img/NDBMS.jpg)
 
-## RDBMS  
+## RDBMS
 
-Relational DBMS is the latest iteration of DBMS proposed in 1980 to mitigate the problems of NDBMS and it did.  
+Relational DBMS is the latest iteration of DBMS proposed in the 1980s to mitigate the problems of NDBMS and it did.
 
-- In RDBMS we store data in the form of tables, even a single data(a record) is stored as an item in a table.  
-- **Entity:**  is the table name.  
-- **Attributes:** are the column names of the table.  
-- **Record:** is one row of data in the table.  
-- True power of RDBMS comes when we link two tables to create relations between them.  
-- It is the most Dominate DBMS in the Software industry.  
+-   In RDBMS we store data in the form of tables, even a single data(a record) is stored in a table.
+-   **Entity:** is the table name.
+-   **Attributes:** are the column names of the table.
+-   **Record:** is one row of data in the table.
+-   True power of RDBMS comes when we link two tables to create relations between them.
+-   It is the most Dominate DBMS in the Software industry.
 
-**Implementations**  
+**Implementations**
 
-- There are many Implementations of RDBMS that are being used in the industry.  
-- Some of them are Oracle database, MySQL(oracle owned), PostgreSQL, MongoDB.  
-- Each RDBMS with its own pros and cons.  
-- **Oracle Database** is the industry-standard RDBMS that is used for enterprise-level products.  
-- **MySQL** is the open-source database that is mostly used by beginners to learn and experiment.  
-- **PostgreSQL** is one of the upcoming databases that is used by startups for faster deployment and flexibility.  
-- In this tutorial, we are learning Oracle SQL 10g.  
-- Currently, the latest Oracle database version is 20c, but many Big companies are still developing products using Oracle 10g, Oracle 11g-xe, Oracle 12g versions.  
-- It is a good practice to learn everything of one oracle version then learn as needed depending on the project and company.  
+-   There are many Implementations of RDBMS that are being used in the industry.
+-   Some of them are Oracle database, MySQL(also owned by Oracle), PostgreSQL, MongoDB, etc.
+-   Each RDBMS has its own pros and cons.
+-   **Oracle Database** is the industry-standard RDBMS that is used for enterprise-level products.
+-   **MySQL** is the open-source database that is mostly used by beginners and for small projects.
+-   **PostgreSQL** is one of the upcoming databases that is used by startups for faster deployment.
+-   In this tutorial, we are learning Oracle SQL 10g.
+-   Currently, the latest Oracle database version is 20c, but many Big companies are still developing products using Oracle 10g, Oracle 11g-xe, Oracle 12g versions.
+-   It is a good practice to learn everything about one oracle version then learn other versions as needed depending on the project and company.
 
-## Installation  
+## Installation
 
-To use Oracle SQL we need a database and an interface to communicate with that database.  
+To use Oracle SQL we need a database and an interface to communicate with that database.
 
-A few of the options to use Oracle SQL to learn are  
+Below are few available options to learn Oracle SQL
 
-- In a web version, officially provided by oracle on [https://livesql.oracle.com/](https://livesql.oracle.com/)
-- Installing on a VM/docker and connecting it via ssh or HTTPS to work with it. (this is good for experimentation)  
-- Installing on your local machine just like other software and work with it.(Preferred)  
+-   In a web version, officially provided by oracle on [https://livesql.oracle.com/](https://livesql.oracle.com/)
+-   Installing on a VM/docker and connecting it via SSH or HTTPS to work with it. (this is good for experimentation)
+-   Installing on your local machine just like other software and work with it. (Preferred)
 
-Currently, I am focusing on Installing oracle 11xe on ubuntu 20.04 and windows 10.  
+Currently, in this guide, I provide instructions on Installing oracle 11g-xe on ubuntu 20.04 and oracle 10g installation on windows 10.
 
-### Ubuntu 20.04 Installation  
+### Ubuntu 20.04 Installation
 
-We need software to use oracle 11g-xe in ubuntu 20.04.  
+Software needed to use oracle 11g-xe in ubuntu 20.04.
 
+1. Oracle JDK 8 or higher
 1. Oracle 11g-xe software package
-2. Sqldeveloper latest version
+1. Latest version of SQLDeveloper Client
 
-To complete the installation of both software we need oracle java 8 or above.  
-This java JDK must be oracle's only, OpenJDK 8 or above doesn't have some libraries installed by default with them.  
-To avoid any hassle and install oracle java JDK 11 from [here](https://www.oracle.com/in/java/technologies/javase-jdk11-downloads.html).  
+The JDK must be Oracle JDK only, OpenJDK 8 or any other JDK will not have some libraries bundled with them.  
+These libraries are needed for the good working of the SQLDeveloper.  
+So to avoid any hassle just install Oracle JDK 11 from [here](https://www.oracle.com/in/java/technologies/javase-jdk11-downloads.html).
 
-#### **Oracle 11g-xe installation(ubuntu)**  
+#### Oracle 11g-xe installation
 
-- First download oracle 11xe for ubuntu from [https://www.oracle.com/in/database/technologies/xe-prior-releases.html](https://www.oracle.com/in/database/technologies/xe-prior-releases.html)  
-- Download the oracle 11g Linux zip file.  
-- `unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip` to extract the file, this will give us an rpm file, which can't be installed in ubuntu.  
-- So we convert rpm to deb, which can be installed in ubuntu.  
-- `Sudo apt-get install alien libaio1 unixodbc` to install required packages.  
-- convert rpm file to deb file with `cd Disk1` `sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm`  
-- Now we got the deb package to install oracle 11g, but before installing it we need to set up some environment properties.  
-- `sudo nano /sbin/chkconfig` and add these lines to that file.  
+-   Download the _oracle 11g Linux zip_ file from [https://www.oracle.com/in/database/technologies/xe-prior-releases.html](https://www.oracle.com/in/database/technologies/xe-prior-releases.html)
+-   `unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip` to extract the contents of the file, this will give us an rpm file, which can't be installed in ubuntu.
+-   So we convert rpm to deb, which can be installed in ubuntu.
+-   `Sudo apt-get install alien libaio1 unixodbc` to install required packages for converting rpm to deb.
+-   convert rpm file to deb file with `cd Disk1` `sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm`
+-   Now we will get a deb package that can install oracle 11g, but before installing it we need to set up some environment properties.
+-   `sudo nano /sbin/chkconfig` and add these lines to that file.
 
 ```bash
 #!/bin/bash
@@ -134,26 +161,24 @@ echo '# Short-Description: Oracle 11g Express Edition' >> $file
 echo '### END INIT INFO' >> $file
 fi
 update-rc.d oracle-xe defaults 80 01
-```  
+```
 
-- Provide this file appropriate permissions. `sudo chmod 755 /sbin/chkconfig`  
-- Oracle 11g needs kernel permission to run, create a file and paste this code in this.  
-- `sudo nano /etc/sysctl.d/60-oracle.conf`  
+-   Provide this file appropriate permissions. `sudo chmod 755 /sbin/chkconfig`
+-   Oracle 11g needs access to kernel to run, create a file `sudo nano /etc/sysctl.d/60-oracle.conf` and add the following lines in it.
 
 ```bash
-# Oracle 11g XE kernel parameters  
-fs.file-max=6815744  
-net.ipv4.ip_local_port_range=9000 65000  
-kernel.sem=250 32000 100 128 
-kernel.shmmax=536870912 
-```  
+# Oracle 11g XE kernel parameters
+fs.file-max=6815744
+net.ipv4.ip_local_port_range=9000 65000
+kernel.sem=250 32000 100 128
+kernel.shmmax=536870912
+```
 
-- Now start these kernel permissions `Sudo service procps start`
-- verify the file and kernel permissions are correct.  
-- `sudo cat /etc/sysctl.d/60-oracle.conf`, `sudo sysctl -q fs.file-max`.  
-- The file-max value in 60-oracle.conf and the output max value should match. If not then a reboot should fix the problem.  
-- setup a mount point for the database to connect to the shell.  
-- create file `sudo nano /etc/rc2.d/S01shm_load`, paste these lines in it  
+-   Run the oracle service with `sudo service procps start`
+-   verify that the file and service properties are correct.
+-   `sudo cat /etc/sysctl.d/60-oracle.conf`, `sudo sysctl -q fs.file-max`.
+-   The file-max value in 60-oracle.conf and the output max value should match. If not then a reboot should fix the problem.
+-   setup a mount point for the database by creating `sudo nano /etc/rc2.d/S01shm_load`, paste these lines in the file.
 
 ```bash
 #!/bin/sh
@@ -165,215 +190,256 @@ start) mkdir /var/lock/subsys 2>/dev/null
        mount -t tmpfs shmfs -o size=2048m /dev/shm ;;
 *) echo error
    exit 1 ;;
-esac 
-```  
+esac
+```
 
-- provide permissions to this file `sudo chmod 755 /etc/rc2.d/S01shm_load`  
-- create links to files `sudo mkdir /var/lock/subsys` ,`sudo touch /var/lock/subsys/listener`.  
-
-- reboot the system now(must), this will get all the data and permissions ready for oracle's actual installation.  
-- go to the oracle folder and type this in a terminal `sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb`.  
-- after done installing, provide the setup with current environment properties `sudo /etc/init.d/oracle-xe configure`  
-- Few questions will be asked while configuring the installation. This is an important part, note all the details for future use.  
-- give the first two options default values by hitting enter twice.  
-- Then it will ask for a root password of the database, the root user is 'sys' or 'sysdba', the password should be valid and strong. Remember this. (sysdba/pass)  
-- hit no, when asked to start oracle on the boot of the system.  
-- Now link the oracle shell to our actual shell.  
-- `nano ~/.bashrc` paste these lines at the end of the file  
+-   provide permissions to this file `sudo chmod 755 /etc/rc2.d/S01shm_load`
+-   create files with `sudo mkdir /var/lock/subsys` ,`sudo touch /var/lock/subsys/listener`.
+-   Now **Must reboot** the system, this will get all the data and permissions ready for oracle 11g-xe installation.
+-   go to the folder with oracle .deb file and type this in a terminal `sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb`.
+-   after done installing, provide the setup with current environment properties `sudo /etc/init.d/oracle-xe configure`
+-   Few questions will be asked while configuring the installation. This is an important part, note all the details for future use.
+-   give the first two options with default values by hitting enter twice.
+-   Then it will ask for a root password of the database, the root user is **'sys' or 'sysdba'**, the password should be valid and strong. Remember the password. (sysdba/pass)
+-   hit no, when asked to start oracle on the boot of the system.
+-   Now link the oracle shell to our actual shell.
+-   `nano ~/.bashrc` paste these lines at the end of the file(**Don't delete existing code**)
 
 ```bash
-# oracle database properties 
+# oracle database properties
 export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
 export ORACLE_SID=XE
 export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
 export ORACLE_BASE=/u01/app/oracle
 export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
 export PATH=$ORACLE_HOME/bin:$PATH
-```  
+```
 
-- update the permission with `. ~/.bashrc`
-- start the oracle service `sudo service oracle-xe start`  
-- Add the current user account to the oracle dba user group, this makes accessing the service possible.
-- `sudo usermod -a -G dba <YOURUSERNAME>`.  
-- Oracle 11g installation is now done  
+-   update the permission with `. ~/.bashrc`
+-   start the oracle service `sudo service oracle-xe start`
+-   Add the current system user account to the oracle dba user group, this makes accessing the service possible.
+-   `sudo usermod -a -G dba <YOURUSERNAME>`.
+-   Oracle 11g installation is now done
 
-**User Creation**  
+**User Creation**
 
-- To use the database, make sure the service started correctly with `sudo service oracle-xe start`.  
-- log in the shell with `sqlplus sys as sysdba`, this is the root account so be careful what operations you perform.  
-- Enter the root password(pass), this is the same password we gave before.  
-- So to avoid any catastrophic failures, it is preferred to create a non-root account for all database actions.
-- Only use the root account for emergencies and management.  
-- create a new user `create user t identified by 0000;` while using sqlplus.  
-- then grant the appropriate permission you need on this account.
+-   To use the database, make sure the service started correctly with `sudo service oracle-xe start`.
+-   log in to the oracle shell with `SQLPlus sys as sysdba`, this is the root account so be careful what operations you perform.
+-   Enter the root password(pass), this is the same password we gave before.
+-   So to avoid any catastrophic failures, it is preferred to create a non-root account for all database actions.
+-   Only use the root account for emergencies and management.
+-   create a new user `create user <USERNAME> identified by <PASSWORD>;`(t/0000).
+-   then grant the appropriate permission you need on this account.
 
 ```SQL
 grant create a session, grant any privilege to t;
 grant unlimited tablespace to t;
 grant create a table to t;
 grant connect, a resource to t;
-```  
+```
 
-- exit the shell with `exit;` and connect with a new user account and practice the SQL.
+-   exit the shell with `exit;` and connect with a new user account and practice the SQL.
 
-**Usage**  
+**Usage**
 
-Oracle 11g can be used from default terminal, sqlplus terminal, SQL developer tool(GUI).  
-It is preferred to first learn in terminal/sqlplus, after mastering it move on to GUI for easy use.  
+Oracle 11g can be used from the default terminal, SQLPlus terminal, SQL developer tool(GUI).  
+It is preferred to first learn in terminal/SQLPlus, after mastering it move on to GUI for easy use.
 
-- Connect to user account with `sqlplus t/0000`, this account has enough permissions to use the database without restrictions.  
-- Remember there is no sample data available on this database(Oracle 11g-xe) to practice.  
-- So we need to create them on our own.
+-   Connect to user account with `SQLPlus t/0000`, this account has enough permissions to use the database without restrictions.
+-   Remember there is no sample data available on this database(Oracle 11g-xe) to practice.
+-   So we need to create them on our own.
 
-#### Oracle sqldeveloper(Ubuntu) Installation
+#### Oracle SQLDeveloper Installation
 
-While the Database we are using is Oracle 11g-xe, we can use the latest SqlDeveloper without any problems.  
+While the Database we are using is Oracle 11g-xe(old version), we can still use the latest SQLDeveloper without any problems.
 
-- Download the latest version of sqldeveloper from [https://www.oracle.com/tools/downloads/sqldev-downloads.html](https://www.oracle.com/tools/downloads/sqldev-downloads.html), download the other platforms zip file.  
-- As mentioned above we need oracle JDK 11 or newer installed for this to work correctly.  
-- Extract the zip to opt directory with `cd /opt`, `sudo unzip ~/Downloads/sqldeveloper-20.2.0.175.1842-no-jre.zip`.  
-- Now all the files of sqldeveloper zip are copied to /opt/sqldeveloper directory, verify that with `ls /opt/sqldeveloper`.  
-- Now link the java JDK path to the SQL developer executable.  
-- Copy the path of java JDK, in ubuntu the path is similar to `/usr/lib/JVM/JDK-11.0.9/`.  
-- Run `./sqldeveloper.sh` file.  
-- If asked for the JDK path paste the above path.  
+-   Download the latest version of **SQLDeveloper for other platforms zip file** from [https://www.oracle.com/tools/downloads/sqldev-downloads.html](https://www.oracle.com/tools/downloads/sqldev-downloads.html).
+-   As mentioned above we need oracle JDK 8 or newer installed for this to work correctly.
+-   If Followed the guide correctly, we would already have JDK 11.
+-   Extract the zip to opt directory with `cd /opt`, `sudo unzip ~/Downloads/SQLDeveloper-20.2.0.175.1842-no-jre.zip`.
+-   Now all the files of SQLDeveloper zip are copied to /opt/SQLDeveloper directory, verify that with `ls /opt/SQLDeveloper`.
+-   We need to link the JDK path to the SQL developer executable.
+-   Copy the path of java JDK, in ubuntu the path is similar to `/usr/lib/JVM/JDK-11.0.9/`.
+-   Run `./SQLDeveloper.sh` file from /opt/SQLDeveloper directory.
+-   If asked for the JDK path paste the above path.
 
-**Create a Shell Shortcut**  
+**Create a Shell Shortcut**
 
-- run `sudo ln -s /opt/sqldeveloper/sqldeveloper.sh /usr/local/bin/sqldeveloper`  
-- Run `sqldeveloper`,in any terminal.  
-- We may get an error, as the file sqldeveloper.sh has a relative path to sqldeveloper.
-- To fix this we need to change the executable path to absolute.  
-- run `sudo nano /opt/sqldeveloper/sqldeveloper.sh`
-- edit the file to look like this and save it.  
+-   run `sudo ln -s /opt/SQLDeveloper/SQLDeveloper.sh /usr/local/bin/SQLDeveloper`
+-   Run `SQLDeveloper`, in any terminal.
+-   We may get an error, as the file SQLDeveloper.sh has a relative path to SQLDeveloper executable.
+-   To fix this we need to change the executable path from relative to absolute.
+-   edit the file `sudo nano /opt/SQLDeveloper/SQLDeveloper.sh`, contents of the file should be similar to the below code.
 
 ```bash
 #!/bin/bash
-#cd "`dirname $0`"/sqldeveloper/bin && bash sqldeveloper $*
-/opt/sqldeveloper/sqldeveloper/bin/sqldeveloper $*  
+#cd "`dirname $0`"/SQLDeveloper/bin && bash SQLDeveloper $*
+/opt/SQLDeveloper/SQLDeveloper/bin/SQLDeveloper $*
 ```
 
-- now try running `sqldeveloper` in the terminal, this will launch the software without any errors.
+-   now try running `SQLDeveloper` in the terminal, this will launch the software without any errors.
 
-**Create a DashBoard/Desktop Shortcut**  
+**Create a DashBoard/Desktop Shortcut**
 
-- Now let's create a desktop shortcut to launch the software from GUI.  
-- run `Sudo nano /usr/share/applications/sqldeveloper.desktop` and paste these lines to create a shortcut
+-   Now let's create a desktop shortcut to launch the software from GUI.
+-   run `Sudo nano /usr/share/applications/SQLDeveloper.desktop` and paste these lines to create a shortcut
 
 ```bash
 [Desktop Entry]
 Name=Oracle SQL Developer
 GenericName=SQL Tool
-Exec=/usr/local/bin/sqldeveloper
-Icon=/opt/sqldeveloper/icon.png
+Exec=/usr/local/bin/SQLDeveloper
+Icon=/opt/SQLDeveloper/icon.png
 Type=Application
 StartupNotify=true
 Categories=Development;
-```  
+```
 
-- That's it the sqldeveloper is installed properly and can be used with the desktop shortcut.
+-   That's it the SQLDeveloper is installed properly and can be used with the desktop shortcut.
 
-### Windows Oracle 10g Installation.  
+### Windows 10 Installation.
 
-**Oracle Sqlplus 10g Installation**
+#### Oracle 10g Installation
 
-Oracle 10g is an Old, Legacy DBMS designed to work on Windows XP and Windows 7, which means we have to turn on the compatibility mode to install on Windows 8 and new versions.
+Oracle 10g is an Old, Legacy DBMS designed to work on Windows XP and Windows 7, which means we have to turn on the compatibility mode to install on Windows 10 and newer versions.
 
-1. Extract the archive and run the Oracle Universal Installer.
+1. Extract the oracle 10g archive and run the Oracle Universal Installer.
 2. Using this we can Install and Uninstall Oracle DBMS tools.
-3. Click on install to install components, click on installed software to uninstall components.
+3. Click on install to install or uninstall components.
 4. By default the software will be installed in the root directory of the drive (Ex: C:\ or D:\).
-5. Create a directory to hold the installation components for ease of use (C:\oracle_installation)
-6. At the beginning Installer will ask for the password for the root database (orcl: database, tiger: password)
-7. Installer will ask for network access to use this DBMS with JDBC and other Command-line tools. Allow it
-8. Installer will Copy all the database files to the specified location and installs them, takes about 10 minutes.
-9. Here A prompt is given to the user which gives information about password management. click on two users Scott and hr unlock them.
-10. Add password for both accounts and confirm it(Scott, hr:tiger: password)
+5. Create a directory to hold the DBMS components for ease of use (C:\oracle_installation)
+6. At the beginning of the installation, it will ask to set up the password for the database (DatabaseName:orcl, Password: tiger)
+7. Installer will ask for network access to use DBMS with JDBC and other Command-line tools. Allow it
+8. Installer will Copy all the database files to the specified location and installs them, this takes about 10 minutes.
+9. A popup with password management information is raised, click on Scott and hr to unlock them.
+10. Add password for both accounts and confirm it(Scott: tiger, hr: tiger)
 11. These are Default users which have all writes over the data they have.
 12. Whereas sys/sysdba is the root user.
-13. To connect we use `connect sys as sysdba` and provide the root password.
-14. At the end of the installation the installer tries to connect to the database service using HTTP (`http://T-Windows:5560/isqlplus/dba`).
+13. To connect we use `connect sys as sysdba` and provide the root password from command prompt or PowerShell.
+14. At the end of the installation the installer tries to connect to the database service using HTTP (`http://T-Windows:5560/iSQLPlus/dba`).
 15. This service URL is used by command-line tools and programming languages to connect to the database.
 16. Since this software is a legacy version, we need to change the compatibility mode to run on Windows XP, And always run with admin privileges as the database needs admin rights to function properly.
 
-**Sqlplus** is a bash like tool with a command-line interface provided by the oracle 10g to connect to the DBMS.  
-We can use other command-line tools to connect to the oracle database service also.  
-(Service name while installing oracle is Oracle home OraDb10g_home1)
+#### Oracle 11g-xe Installation
 
-Oracle Sqlplus is a bash implementation that can be used with any other shell over the network with admin privileges.  
-This can make for more easy use with existing workflow. All we need is the command to connect to the oracle service.  
-`sqlplus username/password` i.e `sqlplus scott/tiger`.  
-This connects you to the sqlplus shell and only those commands work in it. Any command clearing the shell contents will disconnect from the service.
+We **can** have Both Oracle 10g and Oracle 11g-xe installation in a single P.C but it can cause some problems.  
+It is recommended to only install one version of one RDBMS on one PC.  
+If we need another version of Oracle on the same PC, **try a Virtual box installation or Docker image**, but installing two Oracle versions on one PC is **not recommended**.  
+**Just because we can doesn't mean we should.**
 
-To Clear the screen, we use `clear screen;` in sqlplus, but other shells like cmd or PowerShell will disconnect from the sqlplus connection.  
-To clear screen or run native shell command use host as the prefix of command. Ex: `host cls;` cls clears screen normally host gives the command to the native shell instead of sqlplus executing it.
+1. Search in google for oracle 11g windows installer download. Download the appropriate file from the oracle website.
+2. Extract the contents of the zip file then click on the setup file.
+3. It will ask for the path of installation, choose one or create your own folder to manage easily.
+4. Installer will prompt you for a password of the root account give a good password and remember this for future uses. (Pass)
+5. That's it after password confirmation, it will take around 5-20 minutes then the installation is done.
+6. A shortcut is created on the desktop and start menu.
+7. The user name is sys password is Pass(mine).
+8. Using the shortcut we can use the Oracle 11g-xe database from a web interface, if it doesn't work search online for solutions.
 
-**Details about Oracle SqlPlus Editor 10g shell**
+#### Windows SQLDeveloper installation
+
+To install SQLDeveloper in Windows 10, we need Oracle JDK 8 or higher, it is preferred to use Oracle JDK 11.
+
+1. Download the SQLDeveloper latest version for your windows version from [https://www.oracle.com/tools/downloads/sqldev-downloads.html](https://www.oracle.com/tools/downloads/sqldev-downloads.html).
+2. If you don't have JDK installed then download the JDK included version of SQLDeveloper
+3. After downloading the file, extract the contents and copy them to C:\, there is no installation of the SQLDeveloper.
+4. We just run the SQLDeveloper executable every time, so create an executable shortcut on the desktop.
+
+### SQLPlus
+
+SQLPlus is a bash based command-line interface provided by the Oracle installation, which can be used to connect to the DBMS.  
+We can use other command-line tools to connect to the DBMS also.  
+(OraDb10g_home1 is the service name given while installing Oracle)
+
+We can use either the SQLPlus command line tool installed in windows 10 or use the command prompt/any preferred terminal and connect to SQLPlus using these commands.  
+`SQLPlus username/password` i.e `SQLPlus scott/tiger`.
+
+Only Oracle-specific commands will work in SQLPlus. Any commands of the actual terminal(like clear/cls/ls/dir) may disconnect us from the SQLPlus service.
+
+To run native shell commands we use `host` as the prefix of the command.  
+Ex: `host cls;` Here host gives the command to the native terminal instead of SQLPlus executing it, and cls is used to clear the terminal screen.
+
+#### Oracle 10g SQLPlus Useful Commands
 
 ```SQL
 /*
-page size is a group of output lines that are stored in temporary memory. default is 14 lines
-linesize is several characters to be displayed in a single line similar to word wrap.
-default is 80 characters. We change this depending on our needs.
-*/
-set pagesize 2000 linesize 2000
+In SQLPlus each line is limited to display only 80 Characters,
+if output/input is more than 80 it is wrapped to the next line.
 
--- clears the temporary memory buffer which cleans the console screen.
+In SQLPlus the output of each query is stored on a pagefile,
+with a default size of 14 lines per page.
+
+But we can change these using the following command.
+*/
+set pagesize 300 linesize 120
+
+-- clears the pagefile which cleans the console screen.
 clear screen;
 
--- Displays all tables that the current user has access to
+-- Displays all tables that the current user has ACCESS to
 select * from all_tables;
 select * from all_all_tables;
 
-
--- Display tables that are owned by the current user
+-- Displays all tables that are OWNED by the current user
 select * from tab;
 select * from user_tables;
 
--- View all users visible to the current user
+-- Display all users VISIBLE to the current user
 select * from all_users;
 
--- View current user information
+-- Display CURRENT user information
 select * from user_users;
 
--- To access dba or system-level tables or data you need a dba/sys account to access them.
--- asks for the password of the root user.
--- be careful when using this user as this controls the entire database.
+-- To ACCESS system-level tables, we need a dba/sys account/Privileges.
+-- be careful when using root account (or) dba account,
+-- since this account has full control of the database.
 connect sys as sysdba
-
--- connect with other accounts in the same shell
 -- prompts for the password
+
+-- To connect with non-dba accounts use and enter a password
 connect <username>
 
--- logs off the current user from database session but sqlplus still works for another login using connect
+-- Disconnects the current user from the database session.
+-- But SQLPlus won't terminate, we can start another session with a new user account.
 disc
 
--- exits the surplus editor completely.
+-- exits the SQLPlus editor completely.
 exit
 quit
 
--- displays the privileges of current user
+-- displays the PRIVILEGES of current user
 select * from user_sys_privs;
 select * from user_tab_privs;
 select * from user_role_privs;
 
--- displays the column names of a table
+-- Shows all the COLUMN NAMES of a table
 desc <tablename>
 describe <tablename>
 
--- display the column name and their datatype table
+-- Shows COLUMN NAMES and DATATYPE of each column in all tables.
 select * from all_tab_columns;
 
--- view constraints of all tables of the current user
+-- Shows CONSTRAINTS of all tables of the current user
 select * from user_cons_columns;
 
--- view constraints of all tables of all users
+-- Shows CONSTRAINTS of all tables of all users
 select * from all_constraints;
 
+
+-- CRUD Operations
+
 -- create
-create table sdept(branch varchar(30) primary key,bname varchar(30) not null,hod varchar(30));
-create table stu420(rollno number(4) primary key,sname varchar(20)
-not null,totalmarks number(2),branch references sdept(branch));
+create table sdept(
+                    branch varchar(30) primary key,
+                    bname varchar(30) not null,
+                    hod varchar(30)
+                );
+create table stu420(
+                    rollno number(4) primary key,
+                    sname varchar(20) not null,
+                    totalmarks number(2),
+                    branch references sdept(branch)
+                );
 
 -- rename
 rename stu420 to a student;
@@ -392,92 +458,181 @@ insert into student values(1,'somedude',99,'cse');
 update student set marks=88 where sname='somedudecse';
 
 -- grant
-grant select on the student to hr;
+grant select on student to hr;
 
 -- revoke
-revoke select on a student from hr;
+revoke select on student from hr;
 ```
 
-## SQL  
+## SQL
 
-**SQL**: Pronounced as S.Q.L or see quel(SEQUEL) both are correct.  
+Pronounced as S.Q.L or see quel(SEQUEL) both are correct.
 
-SQL is a Structured programming language used to communicate with RDBMS.
-Since it is not safe to use the RDBMS directly we communicate using SQL.  
+SQL stands for Structured Query Language used to communicate with RDBMS.  
+Since it is not safe to use the RDBMS directly we communicate using SQL, which helps to provide a good abstraction.
 
-Since there are multiple implementations of RDBMS in the software industry, we needed a common language that can be used with any RDBMS.  
-Many industry leaders/enthusiasts/Scientists created a common language called **SEQUEL**(Standard English Query Language)  
-Later it was found that the word SEQUEL was already a trademark for another company making car engines.
-Due to this, the name was changed from SEQUEL to **SQL(Structured Query Language)**.
+### History
 
-SQL is just a syntax/format that database developers need to implement in their respective RDBMS.  
+After the proposal of RDBMS, scientists and Software companies of industry started collaborating to create a common language that can be used to communicate with RDBMS.
 
-Most RDBMS support all standard SQL features, but each RDBMS have their own implementations and syntax/flavor of SQL.  
+This common language is called **SEQUEL** which stands for **Structured English QUEry Language**.
 
-This makes learning multiple databases tough, but the base concepts will be the same in all RDBMS.  
-So In this tutorial understand and focus on the concepts and theory rather than the actual syntax.  
+Later it was found that SEQUEL was already a trademark for another company making car engines.
+Due to this, the name was changed from SEQUEL to **SQL(Structured Query Language)**.  
+Today people from different regions call it either SQL OR SEQUEL, but both of them are correct so don't have to worry about it.
 
-Every RDBMS should perform 4 essential operations they are called **CRUD** Operations.  
+SQL become the standard of ANSI(American National Standards Institute) in 1986.  
+SQL become the standard of ISO(Internation Organization of Standardization) in 1987.  
+Each RDBMS that was designed and developed after this standardization, implements SQL, the syntax and commands differ between each RDBMS but the core concepts and standards are the same.  
+These are called different versions of SQL or different flavors of SQL.
 
-**CRUD**  
+This makes learning SQL tough, but the base concepts will be the same in all RDBMS.  
+So In this tutorial **understand and focus on the concepts** rather than the actual syntax.
 
-1. *Create*: Able to create new databases,tables
-2. *Read*: Read existing database,tables
-3. *Update*: Update records in the database and tables
-4. *Delete*: Delete records/columns/tables/databases  
+Every RDBMS should perform 4 essential operations, they are collectively called **CRUD** Operations.
 
-Considering the above crud operations SQL was divided into 5 subcategories.  
-They are
+**CRUD**
 
-### DDL(Data Definition Language)  
+1. _Create_: new databases, tables, views
+2. _Read_: existing tables, databases
+3. _Update_: records, tables, databases
+4. _Delete_: records, columns, tables, databases
 
-DDL is used to create, alter the structure of a table for later use.
-    - This language is rarely used, only to create a table, but in most cases, it would be done already by many database architects, So just need to be aware of them.
-    - This language performs the following statements.
-    - CREATE
-    - ALTER
-    - TRUNCATE
-    - RENAME
-    - DROP
+**Definition**  
+SQL is the standard language to store, retrieve, manipulate data in RDBMS.
 
-### DML(Data Manipulation Language)  
+We use SQL to
 
-DML is used to make modifications to an existing table.
-    - This is most helpful when we made mistakes while creating a database/table so we can change them easily.
-    - Statements supported by DML are:
-    - INSERT
-    - UPDATE
-    - DELETE
+-   Create Tables, Databases, Views.
+-   Inserting records of data into tables.
+-   Update existing records
+-   Deleting existing records
+-   Display (or) Retrieve the records in a table.
+
+Oracle SQL is divided into five categories. They are
+
+-   DDL(Data Definition Language)
+-   DML(Data Manipulation Language)
+-   DCL(Data Control Language)
+-   DTL(Data Transaction Language)
+-   DQL(Data Query Language)
+
+### DDL(Data Definition Language)
+
+Data Definition Language is used to perform operations that define a database and table structure.  
+
+- DDL is rarely used and only by experienced people in an organization.  
+- An Architect or a DBA(DataBase Administrator) takes care of DDL Commands.  
+
+Most perform operations in DDL are
+
+1. Create
+2. Alter
+3. Rename
+4. Truncate
+5. Drop
+
+> All SQL commands and keywords are typed in uppercase, it is not a rule, but a convention followed by all SQL programmers.  
+> All other words and statements of SQL queries can be lowercase or uppercase.  
+
+#### CREATE  
+
+Create command is used to create databases and tables.  
+
+```SQL
+CREATE DATABASE college;
+
+CREATE TABLE students(
+    ID PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Age INT NOT NULL,
+    Branch VARCHAR(10) NOT NULL
+);
+```
+
+#### ALTER  
+
+Alter Command is used to alter tables, columns, and their metadata.  
+
+```SQL
+-- Adds a new column to an existing table  
+ALTER TABLE students ADD email VARCHAR(255);  
+
+-- Renames existing column in a Table
+ALTER TABLE students RENAME COLUMN email TO EmailAddress;
+
+-- Change the Column constraints in a table  
+ALTER TABLE students MODIFY EmailAddress VARCHAR(100) NOT NULL;
+
+-- Delete an entire column of a table
+ALTER TABLE students DROP COLUMN EmailAddress;
+```
+
+#### TRUNCATE  
+
+The truncate command is used to delete all the data in a table leaving only the structure of the table.  
+After truncating the data of a table, columns and their constraints and the relations of that table are only stored.  
+
+```SQL
+-- deletes all the data in the table  
+TRUNCATE TABLE students;
+
+-- deleting all the data in a single column is not possible with truncate
+-- we use to delete for that 
+```
+
+#### RENAME  
+
+Rename Command is used to rename the table or column name.  
+- Used to change the name of Entity(table) or Field(column) or Attribute(Column).
+
+```SQL  
+-- Rename a table  
+RENAME students TO studentdetails;  
+ALTER TABLE studentdetails RENAME TO students;  
+
+-- Rename a column  
+ALTER TABLE students RENAME COLUMN EmailAddress TO email;   
+```
+
+#### DROP  
+
+Drops/Deletes an entire Database or table or column, without any structure left behind like TRUNCATE.
+- Have to be Careful when Dropping tables.  
+- Most of the time **only Admins** get to **drop data**.  
+- When a column or table is dropped all the data in it is deleted then the constraints and relations of that column and table are removed from the database.  
+- Once dropped **can't get the data back** without a proper backup of the entire table/database.
+- Never Drop anything unless ready to deal with the aftermath.
+
+```SQL
+-- Drop Column
+ALTER TABLE students DROP COLUMN email;
+
+-- Drop-Table
+DROP TABLE students;
+
+-- Drop View
+DROP VIEW viewname;
+
+-- Drop Database
+DROP DATABASE college;
+```
+
+### DML(Data Manipulation Language)
+
+DML is used to make modifications to an existing table. - This is most helpful when we made mistakes while creating a database/table so we can change them easily. - Statements supported by DML are: - INSERT - UPDATE - DELETE
 
 ### DCL(Data Control Language)
 
-DCL is used to provide permissions to other users of database access to our tables.
-    - Statements supported are
-    - GRANT
-    - REVOKE
+DCL is used to provide permissions to other users of database access to our tables. - Statements supported are - GRANT - REVOKE
 
 ### DTL/TCL(Data Transaction Language/Transaction Control Language)
 
-DTL is used to save the info to the database after editing it.
-    - Statements supported are
-    - COMMIT
-    - SAVEPOINT
-    - ROLLBACK
-    -
+DTL is used to save the info to the database after editing it. - Statements supported are - COMMIT - SAVEPOINT - ROLLBACK -
 
-### DQL(Data Query Language)  
+### DQL(Data Query Language)
 
-DQL is used to query the data already present in the database. This is the Most used SQL part, we use this to get existing data, modify the data according to our need(read-only).
-    - Statements supported are
-    - SELECT
-    - FROM
-    - WHERE
-    - GROUP BY
-    - ORDER BY
-    - JOIN
-    - ON
-    - DISTINCT
-    - HAVING
+DQL is used to query the data already present in the database. This is the Most used SQL part, we use this to get existing data, modify the data according to our need(read-only). - Statements supported are - SELECT - FROM - WHERE - GROUP BY - ORDER BY - JOIN - ON - DISTINCT - HAVING
 
 Keywords in SQL:
 
@@ -499,7 +654,7 @@ select * from emp where sal between 1000 and 3000;
 -- same as above but easy to write and understand
 ```
 
-3. **ALL**: All keyword is used to filter data based on multiple and condition on a single column.This is mostly used to take data from an array and filter data.
+3. **ALL**: All keyword is used to filter data based on multiple and condition on a single column. This is mostly used to take data from an array and filter data.
 
 ```SQL
 select * from emp where sal>1000 and sal>2000 and sal>3000;
@@ -521,9 +676,9 @@ sal != all(1000,2000,3000)
 -- returns values that are not exactly these value so 1001 and 1999 will be shown.
 
 sal <> all(1000,2000,3000)
--- same as above command, it is another symbol for not equal to in oracle 
+-- same as above command, it is another symbol for not equal to in oracle
 
--- allis another extension for between and 
+-- all is another extension for between and
 ```
 
 4. **ANY** Any keyword is an extension of all keywords, it checks multiple or conditions on multiple comparisons.
