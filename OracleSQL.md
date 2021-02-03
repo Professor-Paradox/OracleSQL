@@ -16,11 +16,27 @@
     - [History](#history)
     - [DDL(Data Definition Language)](#ddldata-definition-language)
       - [CREATE](#create)
+        - [TABLE](#table)
+        - [DATABASE](#database)
       - [ALTER](#alter)
+        - [ADD](#add)
+        - [MODIFY](#modify)
+        - [COLUMN](#column)
       - [TRUNCATE](#truncate)
       - [RENAME](#rename)
+        - [TO](#to)
       - [DROP](#drop)
+      - [Constraints](#constraints)
+      - [Normalization](#normalization)
+        - [First](#first)
+        - [Second](#second)
+        - [Third](#third)
+        - [Fourth](#fourth)
     - [DML(Data Manipulation Language)](#dmldata-manipulation-language)
+      - [INSERT](#insert)
+        - [INTO](#into)
+      - [UPDATE](#update)
+      - [DELETE](#delete)
     - [DCL(Data Control Language)](#dcldata-control-language)
     - [DTL/TCL(Data Transaction Language/Transaction Control Language)](#dtltcldata-transaction-languagetransaction-control-language)
     - [DQL(Data Query Language)](#dqldata-query-language)
@@ -519,10 +535,10 @@ Oracle SQL is divided into five categories. They are
 
 ### DDL(Data Definition Language)
 
-Data Definition Language is used to perform operations that define a database and table structure.  
+Data Definition Language is used to perform operations that **define a database and table structure**.
 
-- DDL is rarely used and only by experienced people in an organization.  
-- An Architect or a DBA(DataBase Administrator) takes care of DDL Commands.  
+-   DDL is rarely used and only by experienced people in an organization.
+-   An Architect or a DBA(DataBase Administrator) takes care of DDL Commands.
 
 Most perform operations in DDL are
 
@@ -533,11 +549,11 @@ Most perform operations in DDL are
 5. Drop
 
 > All SQL commands and keywords are typed in uppercase, it is not a rule, but a convention followed by all SQL programmers.  
-> All other words and statements of SQL queries can be lowercase or uppercase.  
+> All other words and statements of SQL queries can be lowercase or uppercase.
 
-#### CREATE  
+#### CREATE
 
-Create command is used to create databases and tables.  
+Create command is used to create databases and tables.
 
 ```SQL
 CREATE DATABASE college;
@@ -550,59 +566,129 @@ CREATE TABLE students(
 );
 ```
 
-#### ALTER  
+##### TABLE
 
-Alter Command is used to alter tables, columns, and their metadata.  
+Table command is used to DDL Commands to specify the current operation should be perform on the table with given name.
 
 ```SQL
--- Adds a new column to an existing table  
-ALTER TABLE students ADD email VARCHAR(255);  
+-- Here we are create a table with name "students".
+CREATE TABLE students;
+
+-- Modifying a table with name "students"
+ALTER TABLE students;
+```
+
+##### DATABASE
+
+Database command is used with DDL Commands to perform operations on a specific database.
+
+```SQL
+-- Creating a database with name "college"
+CREATE DATABASE college;
+
+-- Deleting a database with name "college"
+DROP DATABASE college;
+```
+
+#### ALTER
+
+Alter Command is used to alter tables, columns, and their metadata.
+
+```SQL
+-- Adds a new column to an existing table
+ALTER TABLE students ADD email VARCHAR(255);
 
 -- Renames existing column in a Table
 ALTER TABLE students RENAME COLUMN email TO EmailAddress;
 
--- Change the Column constraints in a table  
+-- Change the Column constraints in a table
 ALTER TABLE students MODIFY EmailAddress VARCHAR(100) NOT NULL;
 
 -- Delete an entire column of a table
 ALTER TABLE students DROP COLUMN EmailAddress;
 ```
 
-#### TRUNCATE  
+##### ADD
 
-The truncate command is used to delete all the data in a table leaving only the structure of the table.  
-After truncating the data of a table, columns and their constraints and the relations of that table are only stored.  
+Add command is used to add new constraints or columns to a table.  
+This command is used with Alter command most of the time.
 
 ```SQL
--- deletes all the data in the table  
+-- adds a new column to a table
+ALTER TABLE students ADD email VARCHAR(255);
+
+-- adds a new constraint to an existing column
+ALTER TABLE students ADD CONSTRAINT constraintname PRIMARY KEY (column1, column2);
+```
+
+##### MODIFY
+
+Modify command is used to modify existing column type or constraint.
+
+```SQL
+-- modifies existing column constraints and datatype.
+-- if any data is already present then an error is raised or
+-- all the data in that column will be deleted.
+ALTER TABLE students MODIFY email VARCHAR(100) NOT NULL;
+```
+
+##### COLUMN
+
+Column command is used to apply the current operation on a specific column.  
+Used in combination with ALTER, RENAME, UPDATE, DROP commands.
+
+```SQL
+-- renames specific column only.
+ALTER TABLE students RENAME COLUMN email TO emailAddress;
+```
+
+#### TRUNCATE
+
+The truncate command is used to delete all the data in a table leaving only the structure of the table.  
+After truncating the data of a table, columns and their constraints and the relations of that table are only stored.
+
+```SQL
+-- deletes all the data in the table
 TRUNCATE TABLE students;
 
 -- deleting all the data in a single column is not possible with truncate
--- we use to delete for that 
+-- we use to delete for that
 ```
 
-#### RENAME  
+#### RENAME
 
-Rename Command is used to rename the table or column name.  
-- Used to change the name of Entity(table) or Field(column) or Attribute(Column).
+Rename Command is used to rename the table or column name.
 
-```SQL  
--- Rename a table  
-RENAME students TO studentdetails;  
-ALTER TABLE studentdetails RENAME TO students;  
+-   Used to change the name of Entity(table) or Field(column) or Attribute(Column).
 
--- Rename a column  
-ALTER TABLE students RENAME COLUMN EmailAddress TO email;   
+```SQL
+-- Rename a table
+RENAME students TO studentdetails;
+ALTER TABLE studentdetails RENAME TO students;
+
+-- Rename a column
+ALTER TABLE students RENAME COLUMN EmailAddress TO email;
 ```
 
-#### DROP  
+##### TO
+
+To command is used to provide the property or data to a specific table or column.  
+Used with ALTER, RENAME, UPDATE commands most of the time.
+
+```SQL
+-- changes table name from studentdetails to students.
+ALTER TABLE studentdetails RENAME TO students;
+```
+
+#### DROP
 
 Drops/Deletes an entire Database or table or column, without any structure left behind like TRUNCATE.
-- Have to be Careful when Dropping tables.  
-- Most of the time **only Admins** get to **drop data**.  
-- When a column or table is dropped all the data in it is deleted then the constraints and relations of that column and table are removed from the database.  
-- Once dropped **can't get the data back** without a proper backup of the entire table/database.
-- Never Drop anything unless ready to deal with the aftermath.
+
+-   Have to be Careful when Dropping tables.
+-   Most of the time **only Admins** get to **drop data**.
+-   When a column or table is dropped all the data in it is deleted then the constraints and relations of that column and table are removed from the database.
+-   Once dropped **can't get the data back** without a proper backup of the entire table/database.
+-   Never Drop anything unless ready to deal with the aftermath.
 
 ```SQL
 -- Drop Column
@@ -618,9 +704,102 @@ DROP VIEW viewname;
 DROP DATABASE college;
 ```
 
+#### Constraints
+
+To operate a database with good DDL operations we need knowledge of All the constraints of Oracle SQL.
+
+In Oracle SQL we have several Constraints depending on the Normalization level we use one or more.
+
+There are two parts of Constraint.  
+First part of Constraint is providing the datatype accepted by a single column.
+
+Datatypes supported in SQL are
+
+-   NUM
+-   INT
+-   DATE
+-   VARCHAR
+-   VARCHAR2
+-   TIME
+-   FLOAT
+
+The second part of constraint is the restrictions put on each column, these make our table less prone to error with a good type checking.
+
+The restrictions available in Oracle SQL are
+
+-   NULL
+-   NOT NULL
+-   UNIQUE
+-   PRIMARY KEY
+-   FOREIGN KEY
+
+#### Normalization
+
+Normalization is the concept of designing the database with necessary features and guidelines.  
+There are four types of normalizations. they are
+
+-   first rule
+-   second rule
+-   third rule
+-   fourth rule
+
+depending on the database and project we follow one rule
+
+##### First
+
+##### Second
+
+##### Third
+
+##### Fourth
+
 ### DML(Data Manipulation Language)
 
-DML is used to make modifications to an existing table. - This is most helpful when we made mistakes while creating a database/table so we can change them easily. - Statements supported by DML are: - INSERT - UPDATE - DELETE
+Data Manipulation Language is used to modify existing database and table data.
+
+With DML we can perform operations like
+
+-   INSERT
+-   UPDATE
+-   DELETE
+
+#### INSERT
+
+INSERT Command is used to insert data/records in to a table.  
+Commonly we use INTO command with INSERT command.
+
+```SQL
+/*
+    Column details:
+
+    ID PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Age INT NOT NULL,
+    Branch VARCHAR(10) NOT NULL
+*/
+-- Inserts data into students table , the order matters.
+INSERT INTO students VALUES(001,'Earth',20,'Computers');
+
+-- Inserts data into students table, with custom order as we give.
+INSERT INTO students (Age,Branch,Name,ID) VALUES (21,'Electronics','Mars',002);
+
+-- We can skip some columns if the column accepts null values,
+-- but here we have to specify which columns we are providing data for.
+INSERT INTO students (ID,Name,Branch) VALUES (003,'Jupiter','Computers');
+```
+
+##### INTO
+
+Into is a command used mostly with INSERT command to insert data **into a table**.
+
+```SQL
+-- Without Into command we can't put data in the table.
+INSERT INTO students VALUES (001,'Earth',20,'Computers');
+```
+
+#### UPDATE  
+
+#### DELETE  
 
 ### DCL(Data Control Language)
 
