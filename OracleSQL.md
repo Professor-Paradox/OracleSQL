@@ -26,18 +26,16 @@
       - [RENAME](#rename)
         - [TO](#to)
       - [DROP](#drop)
-      - [Constraints](#constraints)
-      - [Normalization](#normalization)
-        - [First](#first)
-        - [Second](#second)
-        - [Third](#third)
-        - [Fourth](#fourth)
     - [DML(Data Manipulation Language)](#dmldata-manipulation-language)
       - [INSERT](#insert)
         - [INTO](#into)
       - [UPDATE](#update)
+        - [SET](#set)
+        - [WHERE](#where)
       - [DELETE](#delete)
     - [DCL(Data Control Language)](#dcldata-control-language)
+      - [GRANT](#grant)
+      - [REVOKE](#revoke)
     - [DTL/TCL(Data Transaction Language/Transaction Control Language)](#dtltcldata-transaction-languagetransaction-control-language)
     - [DQL(Data Query Language)](#dqldata-query-language)
 
@@ -704,55 +702,6 @@ DROP VIEW viewname;
 DROP DATABASE college;
 ```
 
-#### Constraints
-
-To operate a database with good DDL operations we need knowledge of All the constraints of Oracle SQL.
-
-In Oracle SQL we have several Constraints depending on the Normalization level we use one or more.
-
-There are two parts of Constraint.  
-First part of Constraint is providing the datatype accepted by a single column.
-
-Datatypes supported in SQL are
-
--   NUM
--   INT
--   DATE
--   VARCHAR
--   VARCHAR2
--   TIME
--   FLOAT
-
-The second part of constraint is the restrictions put on each column, these make our table less prone to error with a good type checking.
-
-The restrictions available in Oracle SQL are
-
--   NULL
--   NOT NULL
--   UNIQUE
--   PRIMARY KEY
--   FOREIGN KEY
-
-#### Normalization
-
-Normalization is the concept of designing the database with necessary features and guidelines.  
-There are four types of normalizations. they are
-
--   first rule
--   second rule
--   third rule
--   fourth rule
-
-depending on the database and project we follow one rule
-
-##### First
-
-##### Second
-
-##### Third
-
-##### Fourth
-
 ### DML(Data Manipulation Language)
 
 Data Manipulation Language is used to modify existing database and table data.
@@ -799,11 +748,94 @@ INSERT INTO students VALUES (001,'Earth',20,'Computers');
 
 #### UPDATE  
 
+Update Command is used to update existing records.  
+When updating we have to be careful or we may update all the records.  
+
+```SQL  
+-- Updates names of student with id 001
+UPDATE students SET Name='Earth92' WHERE ID=001;
+
+-- If we don't give ID, all the records in students will get a name Earth92
+UPDATE students SET Name='Earth92';
+```
+
+##### SET  
+
+Set command is used to set the data for a specific column or table in SQL.  
+We use Set command mostly with update command.  
+```SQL  
+-- sets all students college name to 'Solar System'
+UPDATE students SET collegename='Solar System';
+```
+
+##### WHERE  
+
+WHERE Command is most used SQL command to filter data in a table.  
+Mostly We use Where command with SELECT, UPDATE, DELETE commands.  
+
+```SQL  
+-- displays only the details of student with id 001
+SELECT * FROM students WHERE ID=001;
+
+-- updates name of student with id 002;
+UPDATE students SET name='Earth91' WHERE ID=002;
+
+-- deletes the entire record of one student with id 002
+DELETE students where ID=002;
+```
+
 #### DELETE  
+
+DELETE Command is used to delete the records in a table.  
+Mostly used to delete one record in a table.  
+If we don't provide a condition to filter the table to delete then the entire table data will be deleted.  
+
+```SQL  
+-- Deletes a single record with id 002 
+DELETE students WHERE ID=002;
+
+-- Deletes group of records with branch computers
+DELETE students WHERE BRANCH='Computers';
+
+-- deletes all the records in students table.
+-- Since their is not Where clause to filter the data SQL will delete all data in the table.
+DELETE students;
+```
 
 ### DCL(Data Control Language)
 
-DCL is used to provide permissions to other users of database access to our tables. - Statements supported are - GRANT - REVOKE
+DCL is used to provide permissions to other users of database, to access to our tables.  
+
+DCL Commands are:  
+1. GRANT  
+2. REVOKE  
+
+#### GRANT  
+
+Grant command is used to give other user specified access to our own tables.  
+Mostly used by Admins, DBA's. They provide relavant permission to each user in the company depending on the need.  
+Some of the common practices of Grant permissions allowed are 
+- Clients has read access of the database. They are allowed to perform DQL operations.    
+- Programmers are given write access to the database and table. They are allowed DML, DQL operations.  
+- Managers and DBA's have full access to the database and tables. They perform all SQL operations.  
+
+```SQL  
+-- giving an user only select permission on college database 
+GRANT SELECT ON college TO clientuser;  
+
+-- giving programer to perform dml,dql operations on college database
+GRANT SELECT,INSERT,UPDATE,DELETE ON college TO programer;
+
+-- giving admins, managers full access on college database 
+GRANT ALL ON college TO  admin,manager,dba;
+```
+
+#### REVOKE  
+
+
+
+
+- Statements supported are - GRANT - REVOKE
 
 ### DTL/TCL(Data Transaction Language/Transaction Control Language)
 
